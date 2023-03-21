@@ -1,0 +1,19 @@
+{
+  "name": "webnotes",
+  "version": "1.0.0",
+  "description": "This project is a responsive website that allows users to take notes on a webpage.     Features:",
+  "main": "app.js",
+  "scripts": {
+    "dev": "nodemon server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.21"
+  }
+}

@@ -18,8 +18,9 @@ startBtn.addEventListener('click', ()=>{
     notes.className += 'textAreaSlide'
     backPageBtn.className += 'backPageBtnSlide'
     nextPageBtn.className += "nextPageBtnSlide"
-
 })
+
+
 
 
 let allNotes = []
@@ -32,19 +33,15 @@ nextPageBtn.addEventListener('click', ()=>{
         pageNumber += 1;
         notes.value = allNotes[pageNumber];
     }
-
     else {
-
         allNotes.push(pageNotes);
         notes.value = "";
         pageNumber += 1;
     }
-
     console.log(pageNumber)
     console.log(allNotes);
-
-
 })
+
 
 // When back page is clicked
 backPageBtn.addEventListener('click', ()=>{
@@ -56,7 +53,26 @@ backPageBtn.addEventListener('click', ()=>{
     else {
         pageNumber -= 1
         notes.value = allNotes[pageNumber];
+
     }
 
 })
+const baseUrl = 'http://localhost:8383/info'
+
+nextPageBtn.addEventListener('click', getNotes)
+
+async function getNotes(e) {
+    e.preventDefault()
+    const res = await fetch(baseUrl, {
+        method: 'GET'
+    })
+    console.log(res)
+    const data = await res.json()
+    notes.value = data.info
+}
+
+async function postNotes() {
+
+
+}
 

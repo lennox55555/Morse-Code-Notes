@@ -19,6 +19,8 @@ Technologies
 The application is built using the following technologies:
 
     Front-end: The application's user interface is built using HTML, CSS, and JavaScript. It uses the Bootstrap framework to ensure a responsive design.
+    Back-end: NodeJS
+    Middleware: ExpressJS
 
 
 Future Work

@@ -45,7 +45,6 @@ nextPageBtn.addEventListener('click', ()=>{
 
 // When back page is clicked
 backPageBtn.addEventListener('click', ()=>{
-    let pageNotes = notes.value;
     if (pageNumber === 0  ) {
         pageNumber = 0
         notes.value = allNotes[pageNumber];
@@ -57,13 +56,14 @@ backPageBtn.addEventListener('click', ()=>{
     }
 
 })
-const baseUrl = 'http://localhost:8383/info'
+const baseUrl = 'http://localhost:8383/'
 
-nextPageBtn.addEventListener('click', getNotes)
+backPageBtn.addEventListener('click', getNotes)
+nextPageBtn.addEventListener('click', postNotes)
 
 async function getNotes(e) {
     e.preventDefault()
-    const res = await fetch(baseUrl, {
+    const res = await fetch(baseUrl + 'info/lennox?key=hello', {
         method: 'GET'
     })
     console.log(res)
@@ -73,6 +73,21 @@ async function getNotes(e) {
 
 async function postNotes() {
 
+    if (notes.value === '') {return}
+    const res = await fetch(baseUrl, {
+
+        method: 'POST',
+        headers: {
+            "content-type": 'application/json'
+        },
+        body: JSON.stringify({
+            parcel: notes.value
+        })
+
+    })
+    console.log(res)
+    const data = await res.json()
+    notes.value = data.info
 
 }
 

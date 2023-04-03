@@ -71,6 +71,7 @@ async function getNotes(e) {
     notes.value = data.info
 }
 
+//async 
 async function postNotes() {
 
     if (notes.value === '') {return}

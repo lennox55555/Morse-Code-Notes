@@ -16,50 +16,48 @@ startBtn.addEventListener('click', ()=>{
     startBtn.className += 'disappear'
     //CSS class elements slide from the left on screen
     notes.className += 'textAreaSlide'
-    //Applies the slide class to back button
     backPageBtn.className += 'backPageBtnSlide'
-    //Applies the slide class to next button
     nextPageBtn.className += "nextPageBtnSlide"
 })
+
+
+
 
 let allNotes = []
 let pageNumber = 0
 
 // When next page is clicked
+
 nextPageBtn.addEventListener('click', ()=>{
     let pageNotes = notes.value;
     //Next page
     if (pageNumber < allNotes.length) {
-        pageNumber += 1;
         notes.value = allNotes[pageNumber];
-
-
-        if (pageNumber === allNotes.length)  {
-            notes.value = '';
-        }
+        pageNumber += 1;
     }
     else if (notes.value ==="") {
         console.log("Cannot go to next page nothing here")
     }
     //If the current page is not blank, add to array and create new empty page
-    else if (pageNotes !== '' && pageNotes !== allNotes[pageNumber - 1]) {
-        pageNumber += 1;
+    else if (pageNotes !== '') {
         allNotes.push(pageNotes);
         notes.value = "";
+        pageNumber += 1;
 
     }
     console.log(pageNumber);
     console.log(allNotes);
-
 })
 
 
 // When back page is clicked
 backPageBtn.addEventListener('click', ()=>{
     if (pageNumber === 0  ) {
-       pageNumber = 0
+        pageNumber = 0
+        notes.value = allNotes[pageNumber];
     }
     else {
+
         pageNumber -= 1
         notes.value = allNotes[pageNumber];
     }
@@ -67,18 +65,7 @@ backPageBtn.addEventListener('click', ()=>{
     console.log(allNotes);
 })
 
-function countWords() {
-    let count = notes.value.split(" ").length;
-    console.log(count)
-}
 
-document.addEventListener("keydown", event => {
-    // Check if the space bar was pressed
-    if (event.code === "Space") {
-        // Do something when space bar is clicked
-        countWords(allNotes)
-    }
-});
 
 
 

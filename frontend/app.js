@@ -27,18 +27,25 @@ let allNotes = []
 let pageNumber = 0
 
 // When next page is clicked
+
 nextPageBtn.addEventListener('click', ()=>{
     let pageNotes = notes.value;
+    //Next page
     if (pageNumber < allNotes.length) {
-        pageNumber += 1;
         notes.value = allNotes[pageNumber];
+        pageNumber += 1;
     }
-    else {
+    else if (notes.value ==="") {
+        console.log("Cannot go to next page nothing here")
+    }
+    //If the current page is not blank, add to array and create new empty page
+    else if (pageNotes !== '') {
         allNotes.push(pageNotes);
         notes.value = "";
         pageNumber += 1;
+
     }
-    console.log(pageNumber)
+    console.log(pageNumber);
     console.log(allNotes);
 })
 
@@ -50,45 +57,15 @@ backPageBtn.addEventListener('click', ()=>{
         notes.value = allNotes[pageNumber];
     }
     else {
+
         pageNumber -= 1
         notes.value = allNotes[pageNumber];
-
     }
-
+    console.log(pageNumber);
+    console.log(allNotes);
 })
-const baseUrl = 'http://localhost:8383/'
 
-backPageBtn.addEventListener('click', getNotes)
-nextPageBtn.addEventListener('click', postNotes)
 
-async function getNotes(e) {
-    e.preventDefault()
-    const res = await fetch(baseUrl + 'info/lennox?key=hello', {
-        method: 'GET'
-    })
-    console.log(res)
-    const data = await res.json()
-    notes.value = data.info
-}
 
-//async 
-async function postNotes() {
 
-    if (notes.value === '') {return}
-    const res = await fetch(baseUrl, {
-
-        method: 'POST',
-        headers: {
-            "content-type": 'application/json'
-        },
-        body: JSON.stringify({
-            parcel: notes.value
-        })
-
-    })
-    console.log(res)
-    const data = await res.json()
-    notes.value = data.info
-
-}
 

@@ -26,23 +26,31 @@ startBtn.addEventListener('click', ()=>{
 let allNotes = []
 let pageNumber = 0
 
-// When next page is clicked
 
+// When next page is clicked
 nextPageBtn.addEventListener('click', ()=>{
     let pageNotes = notes.value;
     //Next page
     if (pageNumber < allNotes.length) {
-        notes.value = allNotes[pageNumber];
         pageNumber += 1;
+        notes.value = allNotes[pageNumber];
+
+        if (pageNumber === allNotes.length)  {
+            notes.value = '';
+        }
+        
     }
     else if (notes.value ==="") {
         console.log("Cannot go to next page nothing here")
+
     }
     //If the current page is not blank, add to array and create new empty page
-    else if (pageNotes !== '') {
+    else if (pageNotes !== '' && pageNotes !== allNotes[pageNumber - 1]) {
+        pageNumber += 1;
         allNotes.push(pageNotes);
         notes.value = "";
-        pageNumber += 1;
+
+
 
     }
     console.log(pageNumber);
@@ -53,8 +61,8 @@ nextPageBtn.addEventListener('click', ()=>{
 // When back page is clicked
 backPageBtn.addEventListener('click', ()=>{
     if (pageNumber === 0  ) {
-        pageNumber = 0
-        notes.value = allNotes[pageNumber];
+
+       // notes.value = allNotes[pageNumber];
     }
     else {
 

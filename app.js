@@ -244,16 +244,3 @@ function textToAudio(morse) {
 
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-

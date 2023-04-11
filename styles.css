@@ -3,12 +3,49 @@
         background-color: darkgrey;
     }
 
+    #controlPanel {
+        position: fixed;
+        margin: auto;
+        height: 250px;
+        width: 200px;
+        background-color: blue;
+        left: -800px;
+        top: 10%;
+    }
+
+    #playCodeBtn {
+        position: fixed;
+        margin: auto;
+        left: -2000px;
+        right: 0;
+        top: 0;
+        bottom: 70%;
+        width: 75px;
+        height: 35px;
+        font-size: 10pt;
+        border-radius: 45px;
+
+    }
+
+    #shareCodeBtn {
+        position: fixed;
+        margin: auto;
+        left: -2000px;
+        right: 0;
+        top: 0;
+        bottom: 70%;
+        width: 75px;
+        height: 35px;
+        font-size: 10pt;
+        border-radius: 45px;
+    }
+
     #backPageBtn {
         position: fixed;
         margin: auto;
         left: -2000px;
         right: 0;
-        top: 30%;
+        top: 70%;
         bottom: 0;
         width: 200px;
         height: 125px;
@@ -21,8 +58,8 @@
         margin: auto;
         left: -2000px;
         right: 0;
-        top: 0;
-        bottom: 30%;
+        top: 20%;
+        bottom: 0;
         width: 200px;
         height: 125px;
         font-size: 24pt;
@@ -54,6 +91,18 @@
         animation: nextPageBtnSlide 1.5s forwards;
     }
 
+    .controlPanelSlide {
+        animation: controlPanelSlide 1.5s forwards;
+    }
+
+    .playCodeBtnSlide {
+        animation: playCodeBtnSlide 1.5s forwards;
+    }
+
+    .shareCodeBtnSlide {
+        animation: shareCodeBtnSlide 1.5s forwards;
+    }
+
     #start-btn {
         position: fixed;
         margin: auto;
@@ -76,6 +125,35 @@
         }
         100% {
             left: 70%;
+        }
+    }
+
+    @keyframes controlPanelSlide {
+        0% {
+
+        }
+        100% {
+            left: 75%;
+        }
+    }
+
+    @keyframes playCodeBtnSlide {
+        0% {
+
+        }
+        100% {
+            left: 80%;
+
+        }
+    }
+
+    @keyframes shareCodeBtnSlide {
+        0% {
+
+        }
+        100% {
+            left: 60%;
+
         }
     }
 

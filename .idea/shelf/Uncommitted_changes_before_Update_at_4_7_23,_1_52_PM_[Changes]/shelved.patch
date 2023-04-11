@@ -1,0 +1,318 @@
+Index: README.md
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>Project Description: Web-based Note-taking Application\nOverview\n\nThis project is a web-based application that allows users to take notes on the web. It provides an easy-to-use interface for creating, editing, and deleting notes. The application stores notes in a database, allowing users to access them from any device with internet access.\nFeatures\n\n    Create new notes: Users can create new notes by clicking on a \"New Note\" button. The application opens a new note window, where users can type in the note's title and content.\n\n    Edit notes: Users can edit existing notes by clicking on the note's title in the application's main interface. This opens a note window, where users can modify the note's title and content.\n\n    Delete notes: Users can delete notes by clicking on the \"Delete\" button next to the note's title in the application's main interface.\n\n    Save notes: The application saves notes automatically as the user types, ensuring that no data is lost due to a sudden power outage or internet connectivity issues.\n\n    Search notes: The application provides a search bar where users can enter keywords to search for notes. The search feature looks through all notes' titles and contents, making it easy to find the right note quickly.\n\nTechnologies\n\nThe application is built using the following technologies:\n\n    Front-end: The application's user interface is built using HTML, CSS, and JavaScript. It uses the Bootstrap framework to ensure a responsive design.\n\n\nFuture Work\n\nThe following features can be added to the application in the future:\n\n    User authentication: Adding user authentication will allow users to create accounts, securing their data.\n\n    Share notes: Adding a feature that allows users to share their notes with others via email or social media.\n\n    Add images: Allowing users to add images to their notes can enhance their functionality.\n\nConclusion\n\nThe web-based note-taking application is a simple yet useful tool for anyone who needs to jot down quick notes. The application's intuitive interface, coupled with its ability to save and retrieve notes, makes it an essential tool for professionals, students, and anyone in between.\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/README.md b/README.md
+--- a/README.md	(revision 22ebb3319745127f1e3ab590da4a5135ae971f35)
++++ b/README.md	(date 1680897004095)
+@@ -19,6 +19,8 @@
+ The application is built using the following technologies:
+ 
+     Front-end: The application's user interface is built using HTML, CSS, and JavaScript. It uses the Bootstrap framework to ensure a responsive design.
++    Back-end: NodeJS
++    Middleware: ExpressJS
+ 
+ 
+ Future Work
+Index: index.html
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <title>WebNotes</title>\n    <link rel=\"stylesheet\" href=\"styles.css\">\n</head>\n<body>\n<div id=\"notepad\">\n    <button id=\"start-btn\">Click to Start</button>\n        <label for=\"notes\"></label><textarea id=\"notes\"></textarea>\n    <div id=\"layout\">\n        <button id=\"nextPageBtn\">Next Page</button>\n        <button id=\"backPageBtn\">Back Page</button>\n    </div>\n\n</div>\n\n</body>\n<script src=\"app.js\"></script>\n</html>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/index.html b/index.html
+--- a/index.html	(revision 22ebb3319745127f1e3ab590da4a5135ae971f35)
++++ b/index.html	(date 1680887528453)
+@@ -12,6 +12,7 @@
+     <div id="layout">
+         <button id="nextPageBtn">Next Page</button>
+         <button id="backPageBtn">Back Page</button>
++
+     </div>
+ 
+ </div>
+Index: styles.css
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>@media screen and (max-width:1680px) {\n    body {\n        background-color: darkgrey;\n    }\n\n    #backPageBtn {\n        position: fixed;\n        margin: auto;\n        left: -2000px;\n        right: 0;\n        top: 30%;\n        bottom: 0;\n        width: 200px;\n        height: 125px;\n        font-size: 24pt;\n        border-radius: 45px;\n    }\n\n    #nextPageBtn {\n        position: fixed;\n        margin: auto;\n        left: -2000px;\n        right: 0;\n        top: 0;\n        bottom: 30%;\n        width: 200px;\n        height: 125px;\n        font-size: 24pt;\n        border-radius: 45px;\n    }\n\n    #notes {\n        position: fixed;\n        margin: auto;\n        right: 0;\n        top: 0;\n        bottom: 0;\n        left: -3000px;\n        width: 600px;\n        height: 700px;\n        font-size: 18pt;\n        padding: 20px 15px;\n\n    }\n    .textAreaSlide {\n        animation: textAreaSlide 1.5s forwards;\n    }\n\n    .backPageBtnSlide {\n        animation: backPageBtnSlide 1.5s forwards;\n    }\n\n    .nextPageBtnSlide {\n        animation: nextPageBtnSlide 1.5s forwards;\n    }\n\n    #start-btn {\n        position: fixed;\n        margin: auto;\n        left: 0;\n        right: 0;\n        top: 0;\n        bottom: 0;\n        width: 300px;\n        height: 100px;\n        font-size: 24pt;\n        border-radius: 30px;\n    }\n\n    .disappear {\n        animation: disappear .5s forwards;\n    }\n    @keyframes backPageBtnSlide {\n        0% {\n\n        }\n        100% {\n            left: 70%;\n        }\n    }\n\n    @keyframes nextPageBtnSlide {\n        0% {\n\n        }\n        100% {\n            left: 70%;\n        }\n    }\n\n    @keyframes textAreaSlide {\n        0% {\n        }\n        100% {\n            left: -30%;\n        }\n    }\n\n    @keyframes disappear {\n        0% {\n            opacity: 1;\n        }\n        100% {\n            opacity: 0;\n        }\n    }\n}\n@media screen and (max-width:980px) {\n    body {\n        background-color: lightsteelblue;\n    }\n\n    #start-btn {\n        position: fixed;\n        margin: auto;\n        left: 0;\n        right: 0;\n        top: 0;\n        bottom: 0;\n        width: 600px;\n        height: 200px;\n        font-size: 40pt;\n        border-radius: 70px;\n\n\n    }\n\n    #notes {\n        position: fixed;\n        margin: auto;\n        left: -2000px;\n        right: 0;\n        top: 0;\n        bottom: 10%;\n        width: 800px;\n        height: 1300px;\n        font-size: 40pt;\n        padding: 15px 25px;\n\n    }\n\n    #backPageBtn {\n        position: fixed;\n        margin: auto;\n        left: -1500px;\n        right: 0;\n        top: 1500px;\n        bottom: 0;\n        width: 200px;\n        height: 125px;\n        font-size: 24pt;\n        border-radius: 45px;\n    }\n\n    #nextPageBtn {\n        position: fixed;\n        margin: auto;\n        left: -2000px;\n        right: 0;\n        top: 1500px;\n        bottom: 0;\n        width: 200px;\n        height: 125px;\n        font-size: 24pt;\n        border-radius: 45px;\n    }\n\n    .textAreaSlide {\n        animation: textAreaSlide 1.5s forwards;\n    }\n\n    .backPageBtnSlide {\n        animation: backPageBtnSlide 1.5s forwards;\n    }\n\n    .nextPageBtnSlide {\n        animation: nextPageBtnSlide 1.5s forwards;\n    }\n\n\n\n    .disappear {\n        animation: disappear .5s forwards;\n    }\n\n    @keyframes backPageBtnSlide {\n        0% {\n\n        }\n        100% {\n            left: 35%;\n        }\n    }\n\n    @keyframes nextPageBtnSlide {\n        0% {\n\n        }\n        100% {\n            left: -35%;\n        }\n    }\n\n    @keyframes textAreaSlide {\n        0% {\n\n        }\n        100% {\n            left: 0;\n\n        }\n    }\n\n    @keyframes disappear {\n        0% {\n            opacity: 1;\n        }\n        100% {\n            opacity: 0;\n        }\n    }\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/styles.css b/styles.css
+--- a/styles.css	(revision 22ebb3319745127f1e3ab590da4a5135ae971f35)
++++ b/styles.css	(date 1680892801135)
+@@ -142,7 +142,7 @@
+     #backPageBtn {
+         position: fixed;
+         margin: auto;
+-        left: -1500px;
++        left: -2000px;
+         right: 0;
+         top: 1500px;
+         bottom: 0;
+@@ -155,7 +155,7 @@
+     #nextPageBtn {
+         position: fixed;
+         margin: auto;
+-        left: -2000px;
++        left: -1500px;
+         right: 0;
+         top: 1500px;
+         bottom: 0;
+@@ -165,6 +165,8 @@
+         border-radius: 45px;
+     }
+ 
++
++
+     .textAreaSlide {
+         animation: textAreaSlide 1.5s forwards;
+     }
+@@ -188,7 +190,7 @@
+ 
+         }
+         100% {
+-            left: 35%;
++            left: -35%;
+         }
+     }
+ 
+@@ -197,7 +199,7 @@
+ 
+         }
+         100% {
+-            left: -35%;
++            left: 35%;
+         }
+     }
+ 
+Index: app.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>// Assigns button element a variable in js\nlet startBtn = document.querySelector('#start-btn');\n\n// Assigns the Notes Textarea a variable\nlet notes = document.getElementById(\"notes\")\n\n// Assigns the Back Button as with a variable\nlet backPageBtn = document.getElementById(\"backPageBtn\")\n\n// Assigns the Next Button as with a variable\nlet nextPageBtn = document.getElementById(\"nextPageBtn\")\n\n// On starting click\nstartBtn.addEventListener('click', ()=>{\n    //CSS class that make opacity 0 over 1sec\n    startBtn.className += 'disappear'\n    //CSS class elements slide from the left on screen\n    notes.className += 'textAreaSlide'\n    backPageBtn.className += 'backPageBtnSlide'\n    nextPageBtn.className += \"nextPageBtnSlide\"\n})\n\n\n\n\nlet allNotes = []\nlet pageNumber = 0\n\n// When next page is clicked\n\nnextPageBtn.addEventListener('click', ()=>{\n    let pageNotes = notes.value;\n    //Next page\n    if (pageNumber < allNotes.length) {\n        notes.value = allNotes[pageNumber];\n        pageNumber += 1;\n    }\n    else if (notes.value ===\"\") {\n        console.log(\"Cannot go to next page nothing here\")\n    }\n    //If the current page is not blank, add to array and create new empty page\n    else if (pageNotes !== '') {\n        allNotes.push(pageNotes);\n        notes.value = \"\";\n        pageNumber += 1;\n\n    }\n    console.log(pageNumber);\n    console.log(allNotes);\n})\n\n\n// When back page is clicked\nbackPageBtn.addEventListener('click', ()=>{\n    if (pageNumber === 0  ) {\n        pageNumber = 0\n        notes.value = allNotes[pageNumber];\n    }\n    else {\n\n        pageNumber -= 1\n        notes.value = allNotes[pageNumber];\n    }\n    console.log(pageNumber);\n    console.log(allNotes);\n})\n\n\n\n\n\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app.js b/app.js
+--- a/app.js	(revision 22ebb3319745127f1e3ab590da4a5135ae971f35)
++++ b/app.js	(date 1680897104318)
+@@ -16,37 +16,42 @@
+     startBtn.className += 'disappear'
+     //CSS class elements slide from the left on screen
+     notes.className += 'textAreaSlide'
++    //Applies the slide class to back button
+     backPageBtn.className += 'backPageBtnSlide'
++    //Applies the slide class to next button
+     nextPageBtn.className += "nextPageBtnSlide"
+ })
+ 
+-
+-
+-
+ let allNotes = []
+ let pageNumber = 0
+ 
+ // When next page is clicked
+-
+ nextPageBtn.addEventListener('click', ()=>{
+     let pageNotes = notes.value;
+     //Next page
+     if (pageNumber < allNotes.length) {
+-        notes.value = allNotes[pageNumber];
+         pageNumber += 1;
++        notes.value = allNotes[pageNumber];
++
++
++        if (pageNumber === allNotes.length)  {
++            notes.value = '';
++        }
+     }
+     else if (notes.value ==="") {
+         console.log("Cannot go to next page nothing here")
+     }
+     //If the current page is not blank, add to array and create new empty page
+-    else if (pageNotes !== '') {
+-        allNotes.push(pageNotes);
+-        notes.value = "";
++    else if (pageNotes !== '' && pageNotes !== allNotes[pageNumber - 1]) {
+         pageNumber += 1;
+ 
++        allNotes.push(stringToMorseCode(pageNotes));
++        notes.value = "";
++
+     }
+     console.log(pageNumber);
+     console.log(allNotes);
++    dotAudioBtn()
+ })
+ 
+ 
+@@ -54,16 +59,162 @@
+ backPageBtn.addEventListener('click', ()=>{
+     if (pageNumber === 0  ) {
+         pageNumber = 0
+-        notes.value = allNotes[pageNumber];
+     }
+     else {
+-
+         pageNumber -= 1
+         notes.value = allNotes[pageNumber];
+     }
+     console.log(pageNumber);
+     console.log(allNotes);
++    dashAudioBtn()
+ })
++
++function countWords() {
++    return notes.value.split(" ").length;
++}
++
++function checkFeatures() {
++    if (notes.value === "") {
++
++
++    }
++    else {
++        //document.body.appendChild(playAudioBtn)
++
++    }
++}
++
++document.addEventListener("keydown", event => {
++    // Check if the space bar was pressed
++    if (event.code === "Space" || event.code === "Backspace") {
++        // Do something when space bar is clicked
++        countWords()
++        checkFeatures()
++        //whiteNoiseSource.start()
++
++
++    }
++});
++
++function stringToMorseCode(str) {
++    const morseCodeMap = {
++        "a": ".-", "b": "-...", "c": "-.-.", "d": "-..", "e": ".", "f": "..-.", "g": "--.",
++        "h": "....", "i": "..", "j": ".---", "k": "-.-", "l": ".-..", "m": "--", "n": "-.",
++        "o": "---", "p": ".--.", "q": "--.-", "r": ".-.", "s": "...", "t": "-", "u": "..-",
++        "v": "...-", "w": ".--", "x": "-..-", "y": "-.--", "z": "--..", "0": "-----",
++        "1": ".----", "2": "..---", "3": "...--", "4": "....-", "5": ".....", "6": "-....",
++        "7": "--...", "8": "---..", "9": "----.", " ": "/"
++    };
++
++    let morseCode = "";
++
++    for (let i = 0; i < str.length; i++) {
++        let char = str[i].toLowerCase();
++
++        if (morseCodeMap[char]) {
++            morseCode += morseCodeMap[char] + " ";
++        } else {
++            morseCode += char + " ";
++        }
++    }
++    return morseCode;
++}
++
++
++
++
++const audioContext = new AudioContext();
++
++console.log(audioContext.sampleRate)
++
++const buffer = audioContext.createBuffer(1, audioContext.sampleRate * .1, audioContext.sampleRate)
++
++channelData = buffer.getChannelData(0)
++
++console.log(channelData.length)
++
++for (let i = 0; i < buffer.length; i++) {
++    channelData[i] = Math.random() * 2 - 1;
++}
++
++const primaryGainControl = audioContext.createGain()
++
++primaryGainControl.gain.setValueAtTime(0.05, 0)
++
++primaryGainControl.connect(audioContext.destination)
++
++// const playAudioBtn = document.createElement("button");
++// playAudioBtn.innerText = "Play"
++// playAudioBtn.addEventListener("click", () => {
++//     const whiteNoiseSource = audioContext.createBufferSource();
++//     whiteNoiseSource.buffer = buffer;
++//     whiteNoiseSource.connect(primaryGainControl)
++//     whiteNoiseSource.start()
++//
++// })
++
++const playAudioBtn = document.createElement("button");
++playAudioBtn.innerText = "Play"
++
++function dotAudioBtn() {
++    const audioCtx = new AudioContext();
++
++// create Oscillator node
++    const oscillator = audioCtx.createOscillator();
++
++    oscillator.type = "square";
++    oscillator.frequency.setValueAtTime(550, audioCtx.currentTime); // value in hertz
++    oscillator.connect(audioCtx.destination);
++    oscillator.start();
++    oscillator.stop(audioContext.currentTime + 0.1)
++
++    textToAudio(stringToMorseCode(notes.value))
++
++}
++
++
++
++function dashAudioBtn() {
++    const audioCtx = new AudioContext();
++
++// create Oscillator node
++    const oscillator = audioCtx.createOscillator();
++
++    oscillator.type = "square";
++    oscillator.frequency.setValueAtTime(550, audioCtx.currentTime); // value in hertz
++    oscillator.connect(audioCtx.destination);
++    oscillator.start();
++    oscillator.stop(audioContext.currentTime + 0.3)
++
++    textToAudio(stringToMorseCode(notes.value))
++
++}
++
++function textToAudio(morse) {
++
++    const morseAudio = {
++        "a.": ".-", "b": "-...", "c": "-.-.", "d": "-..", "e": ".", "f": "..-.", "g": "--.",
++        "h": "....", "i": "..", "j": ".---", "k": "-.-", "l": ".-..", "m": "--", "n": "-.",
++        "o": "---", "p": ".--.", "q": "--.-", "r": ".-.", "s": "...", "t": "-", "u": "..-",
++        "v": "...-", "w": ".--", "x": "-..-", "y": "-.--", "z": "--..", "0": "-----",
++        "1": ".----", "2": "..---", "3": "...--", "4": "....-", "5": ".....", "6": "-....",
++        "7": "--...", "8": "---..", "9": "----.", " ": "/"
++    };
++
++    for (let i = 0; i < morse.length; i++) {
++        console.log("hi")
++        console.log(morse)
++
++    }
++}
++
++
++
++
++
++
++
++
+ 
+ 
+ 

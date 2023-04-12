@@ -7,7 +7,7 @@
         position: fixed;
         margin: auto;
         height: 250px;
-        width: 200px;
+        width: 15%;
         background-color: blue;
         left: -800px;
         top: 10%;
@@ -20,7 +20,7 @@
         right: 0;
         top: 0;
         bottom: 70%;
-        width: 75px;
+        width: 5%;
         height: 35px;
         font-size: 10pt;
         border-radius: 45px;
@@ -34,7 +34,7 @@
         right: 0;
         top: 0;
         bottom: 70%;
-        width: 75px;
+        width: 5%;
         height: 35px;
         font-size: 10pt;
         border-radius: 45px;
@@ -47,9 +47,9 @@
         right: 0;
         top: 70%;
         bottom: 0;
-        width: 200px;
+        width: 15%;
         height: 125px;
-        font-size: 24pt;
+        font-size: 20pt;
         border-radius: 45px;
     }
 
@@ -60,9 +60,9 @@
         right: 0;
         top: 20%;
         bottom: 0;
-        width: 200px;
+        width: 15%;
         height: 125px;
-        font-size: 24pt;
+        font-size: 20pt;
         border-radius: 45px;
     }
 
@@ -142,7 +142,7 @@
 
         }
         100% {
-            left: 70%;
+            left: 78%;
 
         }
     }
@@ -152,7 +152,7 @@
 
         }
         100% {
-            left: 57%;
+            left: 64%;
 
         }
     }
@@ -221,7 +221,7 @@
         position: fixed;
         margin: auto;
         height: 300px;
-        width: 500px;
+        width: 80%;
         background-color: blue;
         left: -1800px;
         top: 80%;
@@ -232,12 +232,13 @@
         margin: auto;
         left: -2000px;
         right: 0;
-        top: 0;
-        bottom: 70%;
-        width: 75px;
-        height: 35px;
-        font-size: 10pt;
+        top: 68%;
+        bottom: 0;
+        width: 15%;
+        height: 5%;
+        font-size: 20pt;
         border-radius: 45px;
+
 
     }
 
@@ -352,7 +353,7 @@
 
         }
         100% {
-            left: 24%;
+            left: 10%;
         }
     }
 
@@ -361,7 +362,7 @@
 
         }
         100% {
-            left: 70%;
+            left: -50%;
 
         }
     }

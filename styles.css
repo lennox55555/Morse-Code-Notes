@@ -13,6 +13,60 @@
         top: 10%;
     }
 
+    #saveCodeBtn {
+        position: fixed;
+        margin: auto;
+        left: -2000px;
+        right: 0;
+        top: 0;
+        bottom: 30%;
+        width: 5%;
+        height: 35px;
+        font-size: 10pt;
+        border-radius: 45px;
+
+    }
+
+    #shareCodeBtn {
+        position: fixed;
+        margin: auto;
+        left: -2000px;
+        right: 0;
+        top: 0;
+        bottom: 30%;
+        width: 5%;
+        height: 35px;
+        font-size: 10pt;
+        border-radius: 45px;
+    }
+
+    #decryptCodeBtn {
+        position: fixed;
+        margin: auto;
+        left: -2000px;
+        right: 0;
+        top: 0;
+        bottom: 50%;
+        width: 5%;
+        height: 35px;
+        font-size: 10pt;
+        border-radius: 45px;
+
+    }
+
+    #encryptCodeBtn {
+        position: fixed;
+        margin: auto;
+        left: -2000px;
+        right: 0;
+        top: 0;
+        bottom: 50%;
+        width: 5%;
+        height: 35px;
+        font-size: 10pt;
+        border-radius: 45px;
+    }
+
     #playCodeBtn {
         position: fixed;
         margin: auto;
@@ -27,7 +81,7 @@
 
     }
 
-    #shareCodeBtn {
+    #pauseCodeBtn {
         position: fixed;
         margin: auto;
         left: -2000px;
@@ -95,12 +149,12 @@
         animation: controlPanelSlide 1.5s forwards;
     }
 
-    .playCodeBtnSlide {
-        animation: playCodeBtnSlide 1.5s forwards;
+    .rightButtonsSlide {
+        animation: rightButtonsSlide 1.5s forwards;
     }
 
-    .shareCodeBtnSlide {
-        animation: shareCodeBtnSlide 1.5s forwards;
+    .leftButtonsSlide {
+        animation: leftButtonsSlide 1.5s forwards;
     }
 
     #start-btn {
@@ -137,7 +191,7 @@
         }
     }
 
-    @keyframes playCodeBtnSlide {
+    @keyframes rightButtonsSlide {
         0% {
 
         }
@@ -147,7 +201,7 @@
         }
     }
 
-    @keyframes shareCodeBtnSlide {
+    @keyframes leftButtonsSlide {
         0% {
 
         }
@@ -232,7 +286,7 @@
         margin: auto;
         left: -2000px;
         right: 0;
-        top: 68%;
+        top: 67%;
         bottom: 0;
         width: 15%;
         height: 5%;
@@ -247,11 +301,11 @@
         margin: auto;
         left: -2000px;
         right: 0;
-        top: 0;
-        bottom: 70%;
-        width: 75px;
-        height: 35px;
-        font-size: 10pt;
+        top: 81%;
+        bottom: 0;
+        width: 15%;
+        height: 5%;
+        font-size: 20pt;
         border-radius: 45px;
     }
 
@@ -372,7 +426,7 @@
 
         }
         100% {
-            left: 57%;
+            left: -50%;
 
         }
     }

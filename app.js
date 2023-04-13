@@ -2,23 +2,29 @@
 let startBtn = document.querySelector('#start-btn');
 
 //Assigns the Notes Textarea a variable
-let notes = document.getElementById("notes")
+let notes = document.getElementById("notes");
 
 //Assigns the Back Button as with a variable
-let backPageBtn = document.getElementById("backPageBtn")
+let backPageBtn = document.getElementById("backPageBtn");
 
 //Assigns the Next Button as with a variable
-let nextPageBtn = document.getElementById("nextPageBtn")
+let nextPageBtn = document.getElementById("nextPageBtn");
 
 //Assigns the play Button as with a variable
-let playCodeBtn = document.getElementById("playCodeBtn")
+let playCodeBtn = document.getElementById("playCodeBtn");
 
 //
-let controlPanelMap = document.getElementById("controlPanel")
+let controlPanelMap = document.getElementById("controlPanel");
 
-let shareCodeBtn = document.getElementById("shareCodeBtn")
- 
+let shareCodeBtn = document.getElementById("shareCodeBtn");
 
+let encryptCodeBtn = document.getElementById("encryptCodeBtn");
+
+let decryptCodeBtn = document.getElementById("decryptCodeBtn");
+
+let saveCodeBtn = document.getElementById("saveCodeBtn");
+
+let pauseCodeBtn = document.getElementById("pauseCodeBtn");
 
 //On starting click
 startBtn.addEventListener('click', ()=>{
@@ -33,9 +39,17 @@ startBtn.addEventListener('click', ()=>{
 
     controlPanelMap.className += "controlPanelSlide"
 
-    playCodeBtn.className += "playCodeBtnSlide"
+    playCodeBtn.className += "leftButtonsSlide"
 
-    shareCodeBtn.className += "shareCodeBtnSlide"
+    shareCodeBtn.className += "rightButtonsSlide"
+
+    encryptCodeBtn.className += "leftButtonsSlide"
+
+    decryptCodeBtn.className += "rightButtonsSlide"
+
+    pauseCodeBtn.className += "rightButtonsSlide"
+
+    saveCodeBtn.className += "leftButtonsSlide"
 
 
 })
@@ -280,16 +294,4 @@ function textToAudio(morse) {
 
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
 

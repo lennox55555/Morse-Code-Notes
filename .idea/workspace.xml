@@ -4,7 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d09ea055-04f8-4ce2-92f5-18dfdc16d01e" name="Changes" comment="WebNotes 4.0&#10;Hosted on lennoxanderson.com/webnotes&#10;added a share button that uses native email&#10;play audio button that converts morse code text to audio" />
+    <list default="true" id="d09ea055-04f8-4ce2-92f5-18dfdc16d01e" name="Changes" comment="WebNotes 4.0&#10;Hosted on lennoxanderson.com/webnotes&#10;added a share button that uses native email&#10;play audio button that converts morse code text to audio">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/styles.css" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -21,9 +26,16 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="UPDATE_TYPE" value="REBASE" />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/app.js" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectId" id="2N3wIwTnXm8gwIQZqhgBiOnGyYA" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -44,6 +56,7 @@
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_interpreter_path": "node",
     "nodejs_package_manager_path": "npm",
+    "run.code.analysis.last.selected.profile": "pProject Default",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -74,7 +87,7 @@
       <workItem from="1678905999020" duration="29480000" />
       <workItem from="1679335805987" duration="3810000" />
       <workItem from="1679428094548" duration="14119000" />
-      <workItem from="1680646717109" duration="43688000" />
+      <workItem from="1680646717109" duration="64884000" />
     </task>
     <task id="LOCAL-00001" summary="Made READ ME">
       <created>1679428275659</created>
@@ -139,7 +152,14 @@
       <option name="project" value="LOCAL" />
       <updated>1681241529784</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="WebNotes 4.0&#10;Hosted on lennoxanderson.com/webnotes&#10;added a share button that uses native email&#10;play audio button that converts morse code text to audio">
+      <created>1681241806002</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1681241806002</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

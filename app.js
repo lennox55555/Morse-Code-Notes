@@ -2,23 +2,29 @@
 let startBtn = document.querySelector('#start-btn');
 
 //Assigns the Notes Textarea a variable
-let notes = document.getElementById("notes")
+let notes = document.getElementById("notes");
 
 //Assigns the Back Button as with a variable
-let backPageBtn = document.getElementById("backPageBtn")
+let backPageBtn = document.getElementById("backPageBtn");
 
 //Assigns the Next Button as with a variable
-let nextPageBtn = document.getElementById("nextPageBtn")
+let nextPageBtn = document.getElementById("nextPageBtn");
 
 //Assigns the play Button as with a variable
-let playCodeBtn = document.getElementById("playCodeBtn")
+let playCodeBtn = document.getElementById("playCodeBtn");
 
 //
-let controlPanelMap = document.getElementById("controlPanel")
+let controlPanelMap = document.getElementById("controlPanel");
 
-let shareCodeBtn = document.getElementById("shareCodeBtn")
+let shareCodeBtn = document.getElementById("shareCodeBtn");
 
+let encryptCodeBtn = document.getElementById("encryptCodeBtn");
 
+let decryptCodeBtn = document.getElementById("decryptCodeBtn");
+
+let saveCodeBtn = document.getElementById("saveCodeBtn");
+
+let pauseCodeBtn = document.getElementById("pauseCodeBtn");
 
 //On starting click
 startBtn.addEventListener('click', ()=>{
@@ -33,14 +39,25 @@ startBtn.addEventListener('click', ()=>{
 
     controlPanelMap.className += "controlPanelSlide"
 
-    playCodeBtn.className += "playCodeBtnSlide"
+    playCodeBtn.className += "leftButtonsSlide"
 
-    shareCodeBtn.className += "shareCodeBtnSlide"
+    shareCodeBtn.className += "rightButtonsSlide"
+
+    encryptCodeBtn.className += "leftButtonsSlide"
+
+    decryptCodeBtn.className += "rightButtonsSlide"
+
+    pauseCodeBtn.className += "rightButtonsSlide"
+
+    saveCodeBtn.className += "leftButtonsSlide"
+
+    notes.value = localStorage.getItem("0")
 
 
 })
 //Initializes an array to store every page
 let allNotes = []
+//Initializes an array to store every page in morse code
 let allMorseNotes = []
 //Initializes page number for reference and display
 let pageNumber = 0
@@ -48,41 +65,46 @@ let pageNumber = 0
 //When next page is clicked
 nextPageBtn.addEventListener('click', ()=>{
 
-    let pageNotes = notes.value;
-    //If next page has content load the next page.
+    //If next page has content
     if (pageNumber < allNotes.length) {
         //index page number
         pageNumber += 1;
         //page content is equal to next page
         notes.value = allNotes[pageNumber];
+        //notes.value = localStorage.getItem(`${pageNumber}`)
 
         //Prevents loading new page with undefined once back button is clicked
         if (pageNumber === allNotes.length)  {
             notes.value = '';
+
         }
     }
+
     //Prevents from create more pages when user already has a blank page.
     else if (notes.value ==="") {
         //alerts user that page cannot be created
         alert("Cannot advance to next page without any text.")
     }
     //If the current page is not blank, add to array and create new empty page
-    else if (pageNotes !== '' && pageNotes !== allNotes[pageNumber - 1]) {
+    else if (notes.value !== '' && notes.value !== allNotes[pageNumber - 1]) {
         //index page
         pageNumber += 1;
         //converts all text to morse code and appends to All Notes Array
-        allNotes.push(pageNotes);
+        allNotes.push(notes.value);
         //appends to All Notes Array
-        allMorseNotes.push(stringToMorseCode(pageNotes));
+        allMorseNotes.push(stringToMorseCode(notes.value));
         //sets the page value to nothing
         notes.value = "";
 
+
     }
+
     //test case
     console.log(pageNumber);
     //test case
     console.log(allNotes);
     console.log(allMorseNotes)
+    save()
 })
 
 //When back page is clicked
@@ -91,8 +113,18 @@ backPageBtn.addEventListener('click', ()=>{
     if (pageNumber === 0  ) {
         pageNumber = 0
     }
+
     // If there is a previous page, display previous page
     else {
+      if (!allNotes.includes(notes.value) && notes.value !=='') {
+            //converts all text to morse code and appends to All Notes Array
+            allNotes.push(notes.value);
+            //appends to All Notes Array
+            allMorseNotes.push(stringToMorseCode(notes.value));
+
+            //sets the page content to page number
+            notes.value = allNotes[pageNumber];
+        }
         pageNumber -= 1
         //sets the page content to page number
         notes.value = allNotes[pageNumber];
@@ -101,6 +133,15 @@ backPageBtn.addEventListener('click', ()=>{
     console.log(pageNumber);
     //test case
     console.log(allNotes);
+    save()
+})
+
+encryptCodeBtn.addEventListener('click', ()=>{
+    notes.value = stringToMorseCode(notes.value)
+})
+
+decryptCodeBtn.addEventListener('click', ()=>{
+    notes.value = decodeMorse(notes.value)
 })
 
 shareCodeBtn.addEventListener('click', ()=>{
@@ -108,10 +149,33 @@ shareCodeBtn.addEventListener('click', ()=>{
     console.log("done")
 })
 
+saveCodeBtn.addEventListener('click', ()=> {
+    save()
+})
 
 playCodeBtn.addEventListener('click', ()=>{
     textToAudio(stringToMorseCode(notes.value))
 })
+
+function save() {
+    for (let i=0; i<allNotes.length; i++) {
+        localStorage.setItem(`${i}`, allNotes[i])
+        //localStorage.setItem(`${i + 1}`)
+    }
+    localStorage.setItem(`${pageNumber}`,notes.value)
+}
+
+function countLocalStorageItems() {
+    let count = 0;
+    for (let i = 0; i < localStorage.length; i++) {
+        const key = localStorage.key(i);
+        if (key) {
+            count++;
+        }
+    }
+    return count;
+}
+
 function countWords() {
     return notes.value.split(" ").length;
 }
@@ -187,15 +251,6 @@ primaryGainControl.gain.setValueAtTime(0.05, 0)
 
 primaryGainControl.connect(audioContext.destination)
 
-// const playAudioBtn = document.createElement("button");
-// playAudioBtn.innerText = "Play"
-// playAudioBtn.addEventListener("click", () => {
-//     const whiteNoiseSource = audioContext.createBufferSource();
-//     whiteNoiseSource.buffer = buffer;
-//     whiteNoiseSource.connect(primaryGainControl)
-//     whiteNoiseSource.start()
-//
-// })
 
 const playAudioBtn = document.createElement("button");
 playAudioBtn.innerText = "Play"
@@ -215,7 +270,6 @@ function dotAudioBtn() {
     //textToAudio(stringToMorseCode(notes.value))
 
 }
-
 
 
 function dashAudioBtn() {
@@ -277,19 +331,30 @@ function textToAudio(morse) {
         }
     },400);
 
-
-
 }
 
+function decodeMorse(morseCode) {
+    // Define the Morse code alphabet as a lookup table
+    const morseAlphabet = {
+        ".-": "A", "-...": "B", "-.-.": "C", "-..": "D", ".": "E", "..-.": "F", "--.": "G",
+        "....": "H", "..": "I", ".---": "J", "-.-": "K", ".-..": "L", "--": "M", "-.": "N",
+        "---": "O", ".--.": "P", "--.-": "Q", ".-.": "R", "...": "S", "-": "T", "..-": "U",
+        "...-": "V", ".--": "W", "-..-": "X", "-.--": "Y", "--..": "Z", ".----": "1",
+        "..---": "2", "...--": "3", "....-": "4", ".....": "5", "-....": "6", "--...": "7",
+        "---..": "8", "----.": "9", "-----": "0", "--..--": ",", ".-.-.-": ".", "..--..": "?",
+        "-..-.": " ", "-.--.": "(", "-.--.-": ")", ".--.-.": "@", "-....-": "-", "-...-": "=",
+        ".-.-.": "+", "-.-.-.": ";", "---...": ":", "-.-.--": "!", ".-..-.": "\"", "...-..-": "$",
+        ". ...": "SOS"
+    };
 
+    // Split the input Morse code into individual letters
+    const letters = morseCode.trim().split(" ");
 
+    // Decode each letter using the lookup table
+    const text = letters
+        .map(letter => morseAlphabet[letter])
+        .join("");
 
-
-
-
-
-
-
-
-
+    return text;
+}
 

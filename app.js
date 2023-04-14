@@ -66,12 +66,13 @@ let pageNumber = 0
 nextPageBtn.addEventListener('click', ()=>{
 
     //If next page has content
-    if (pageNumber < allNotes.length) {
+    if (pageNumber < countLocalStorageItems()) {
         //index page number
         pageNumber += 1;
         //page content is equal to next page
-        notes.value = allNotes[pageNumber];
-        //notes.value = localStorage.getItem(`${pageNumber}`)
+        //notes.value = allNotes[pageNumber];
+        notes.value = localStorage.getItem(`${pageNumber}`)
+       // notes.value = localStorage.key(pageNumber)
 
         //Prevents loading new page with undefined once back button is clicked
         if (pageNumber === allNotes.length)  {
@@ -85,16 +86,23 @@ nextPageBtn.addEventListener('click', ()=>{
         //alerts user that page cannot be created
         alert("Cannot advance to next page without any text.")
     }
-    //If the current page is not blank, add to array and create new empty page
-    else if (notes.value !== '' && notes.value !== allNotes[pageNumber - 1]) {
+
+    //Adds the Page && notes.value !== localStorage.getItem(`${pageNumber -1}`)
+    else if (notes.value !== '') {
+
+        localStorage.setItem(`${pageNumber}`, notes.value)
         //index page
         pageNumber += 1;
         //converts all text to morse code and appends to All Notes Array
         allNotes.push(notes.value);
         //appends to All Notes Array
         allMorseNotes.push(stringToMorseCode(notes.value));
+
+
+
         //sets the page value to nothing
         notes.value = "";
+        console.log("it happens")
 
 
     }
@@ -104,7 +112,7 @@ nextPageBtn.addEventListener('click', ()=>{
     //test case
     console.log(allNotes);
     console.log(allMorseNotes)
-    save()
+        //save()
 })
 
 //When back page is clicked

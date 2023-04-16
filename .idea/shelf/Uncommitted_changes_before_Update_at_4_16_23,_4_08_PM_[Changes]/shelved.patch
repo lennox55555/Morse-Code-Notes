@@ -1,0 +1,212 @@
+Index: app.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>//Assigns button element a variable in js\nlet startBtn = document.querySelector('#start-btn');\n\n//Assigns the Notes Textarea a variable\nlet notes = document.getElementById(\"notes\");\n\n//Assigns the Back Button as with a variable\nlet backPageBtn = document.getElementById(\"backPageBtn\");\n\n//Assigns the Next Button as with a variable\nlet nextPageBtn = document.getElementById(\"nextPageBtn\");\n\n//Assigns the play Button as with a variable\nlet playCodeBtn = document.getElementById(\"playCodeBtn\");\n\n//\nlet controlPanelMap = document.getElementById(\"controlPanel\");\n\nlet shareCodeBtn = document.getElementById(\"shareCodeBtn\");\n\nlet encryptCodeBtn = document.getElementById(\"encryptCodeBtn\");\n\nlet decryptCodeBtn = document.getElementById(\"decryptCodeBtn\");\n\nlet saveCodeBtn = document.getElementById(\"saveCodeBtn\");\n\nlet pauseCodeBtn = document.getElementById(\"pauseCodeBtn\");\n\n//On starting click\nstartBtn.addEventListener('click', ()=>{\n    //CSS class that make opacity 0 over 1sec\n    startBtn.className += 'disappear'\n    //CSS class elements slide from the left on screen\n    notes.className += 'textAreaSlide'\n    //Applies the slide class to back button\n    backPageBtn.className += 'backPageBtnSlide'\n    //Applies the slide class to next button\n    nextPageBtn.className += \"nextPageBtnSlide\"\n\n    controlPanelMap.className += \"controlPanelSlide\"\n\n    playCodeBtn.className += \"leftButtonsSlide\"\n\n    shareCodeBtn.className += \"rightButtonsSlide\"\n\n    encryptCodeBtn.className += \"leftButtonsSlide\"\n\n    decryptCodeBtn.className += \"rightButtonsSlide\"\n\n    pauseCodeBtn.className += \"rightButtonsSlide\"\n\n    saveCodeBtn.className += \"leftButtonsSlide\"\n\n    notes.value = localStorage.getItem(\"0\")\n\n\n})\n//Initializes an array to store every page\nlet allNotes = []\n//Initializes an array to store every page in morse code\nlet allMorseNotes = []\n//Initializes page number for reference and display\nlet pageNumber = 0\n\n//When next page is clicked\nnextPageBtn.addEventListener('click', ()=>{\n\n    //If next page has content\n    if (pageNumber < allNotes.length) {\n        //index page number\n        pageNumber += 1;\n        //page content is equal to next page\n        notes.value = allNotes[pageNumber];\n        //notes.value = localStorage.getItem(`${pageNumber}`)\n\n        //Prevents loading new page with undefined once back button is clicked\n        if (pageNumber === allNotes.length)  {\n            notes.value = '';\n\n        }\n    }\n\n    //Prevents from create more pages when user already has a blank page.\n    else if (notes.value ===\"\") {\n        //alerts user that page cannot be created\n        alert(\"Cannot advance to next page without any text.\")\n    }\n    //If the current page is not blank, add to array and create new empty page\n    else if (notes.value !== '' && notes.value !== allNotes[pageNumber - 1]) {\n        //index page\n        pageNumber += 1;\n        //converts all text to morse code and appends to All Notes Array\n        allNotes.push(notes.value);\n        //appends to All Notes Array\n        allMorseNotes.push(stringToMorseCode(notes.value));\n        //sets the page value to nothing\n        notes.value = \"\";\n\n\n    }\n\n    //test case\n    console.log(pageNumber);\n    //test case\n    console.log(allNotes);\n    console.log(allMorseNotes)\n    save()\n})\n\n//When back page is clicked\nbackPageBtn.addEventListener('click', ()=>{\n    //Prevents program to going to negative page number\n    if (pageNumber === 0  ) {\n        pageNumber = 0\n    }\n\n    // If there is a previous page, display previous page\n    else {\n      if (!allNotes.includes(notes.value) && notes.value !=='') {\n            //converts all text to morse code and appends to All Notes Array\n            allNotes.push(notes.value);\n            //appends to All Notes Array\n            allMorseNotes.push(stringToMorseCode(notes.value));\n\n            //sets the page content to page number\n            notes.value = allNotes[pageNumber];\n        }\n        pageNumber -= 1\n        //sets the page content to page number\n        notes.value = allNotes[pageNumber];\n    }\n    //test case\n    console.log(pageNumber);\n    //test case\n    console.log(allNotes);\n    save()\n})\n\nencryptCodeBtn.addEventListener('click', ()=>{\n    notes.value = stringToMorseCode(notes.value)\n})\n\ndecryptCodeBtn.addEventListener('click', ()=>{\n    notes.value = decodeMorse(notes.value)\n})\n\nshareCodeBtn.addEventListener('click', ()=>{\n    window.open(`mailto:test@example.com?subject=subject&body=${allMorseNotes}`);\n    console.log(\"done\")\n})\n\nsaveCodeBtn.addEventListener('click', ()=> {\n    save()\n})\n\nplayCodeBtn.addEventListener('click', ()=>{\n    textToAudio(stringToMorseCode(notes.value))\n})\n\nfunction save() {\n    for (let i=0; i<allNotes.length; i++) {\n        localStorage.setItem(`${i}`, allNotes[i])\n        //localStorage.setItem(`${i + 1}`)\n    }\n    localStorage.setItem(`${pageNumber}`,notes.value)\n}\n\nfunction countLocalStorageItems() {\n    let count = 0;\n    for (let i = 0; i < localStorage.length; i++) {\n        const key = localStorage.key(i);\n        if (key) {\n            count++;\n        }\n    }\n    return count;\n}\n\nfunction countWords() {\n    return notes.value.split(\" \").length;\n}\n\nfunction checkFeatures() {\n    if (notes.value === \"\") {\n\n    }\n    else {\n        //document.body.appendChild(playAudioBtn)\n\n    }\n}\n\n\ndocument.addEventListener(\"keydown\", event => {\n    // Check if the space bar was pressed\n    if (event.code === \"Space\" || event.code === \"Backspace\") {\n        // Do something when space bar is clicked\n        countWords()\n        checkFeatures()\n        //whiteNoiseSource.start()\n\n\n    }\n});\n\nfunction stringToMorseCode(str) {\n    const morseCodeMap = {\n        \"a\": \".-\", \"b\": \"-...\", \"c\": \"-.-.\", \"d\": \"-..\", \"e\": \".\", \"f\": \"..-.\", \"g\": \"--.\",\n        \"h\": \"....\", \"i\": \"..\", \"j\": \".---\", \"k\": \"-.-\", \"l\": \".-..\", \"m\": \"--\", \"n\": \"-.\",\n        \"o\": \"---\", \"p\": \".--.\", \"q\": \"--.-\", \"r\": \".-.\", \"s\": \"...\", \"t\": \"-\", \"u\": \"..-\",\n        \"v\": \"...-\", \"w\": \".--\", \"x\": \"-..-\", \"y\": \"-.--\", \"z\": \"--..\", \"0\": \"-----\",\n        \"1\": \".----\", \"2\": \"..---\", \"3\": \"...--\", \"4\": \"....-\", \"5\": \".....\", \"6\": \"-....\",\n        \"7\": \"--...\", \"8\": \"---..\", \"9\": \"----.\", \" \": \"/\"\n    };\n\n    let morseCode = \"\";\n\n    for (let i = 0; i < str.length; i++) {\n        let char = str[i].toLowerCase();\n\n        if (morseCodeMap[char]) {\n            morseCode += morseCodeMap[char] + \" \";\n        } else {\n            morseCode += char + \" \";\n        }\n    }\n\n    return morseCode;\n}\n\n\n\n\nconst audioContext = new AudioContext();\n\nconsole.log(audioContext.sampleRate)\n\nconst buffer = audioContext.createBuffer(1, audioContext.sampleRate * .1, audioContext.sampleRate)\n\nchannelData = buffer.getChannelData(0)\n\nconsole.log(channelData.length)\n\nfor (let i = 0; i < buffer.length; i++) {\n    channelData[i] = Math.random() * 2 - 1;\n}\n\nconst primaryGainControl = audioContext.createGain()\n\nprimaryGainControl.gain.setValueAtTime(0.05, 0)\n\nprimaryGainControl.connect(audioContext.destination)\n\n\nconst playAudioBtn = document.createElement(\"button\");\nplayAudioBtn.innerText = \"Play\"\n\nfunction dotAudioBtn() {\n    const audioCtx = new AudioContext();\n\n// create Oscillator node\n    const oscillator = audioCtx.createOscillator();\n\n    oscillator.type = \"square\";\n    oscillator.frequency.setValueAtTime(550, audioCtx.currentTime); // value in hertz\n    oscillator.connect(audioCtx.destination);\n    oscillator.start();\n    oscillator.stop(audioContext.currentTime + 0.1)\n\n    //textToAudio(stringToMorseCode(notes.value))\n\n}\n\n\nfunction dashAudioBtn() {\n    const audioCtx = new AudioContext();\n\n// create Oscillator node\n    const oscillator = audioCtx.createOscillator();\n\n    oscillator.type = \"square\";\n    oscillator.frequency.setValueAtTime(550, audioCtx.currentTime); // value in hertz\n    oscillator.connect(audioCtx.destination);\n    oscillator.start();\n    oscillator.stop(audioContext.currentTime + 0.3)\n\n    //textToAudio(stringToMorseCode(notes.value))\n\n}\n\nfunction spaceAudioBtn() {\n    const audioCtx = new AudioContext();\n\n// create Oscillator node\n    const oscillator = audioCtx.createOscillator();\n\n    oscillator.type = \"square\";\n    oscillator.frequency.setValueAtTime(0, audioCtx.currentTime); // value in hertz\n    oscillator.connect(audioCtx.destination);\n    oscillator.start();\n    oscillator.stop(audioContext.currentTime + 0.3)\n\n    //textToAudio(stringToMorseCode(notes.value))\n\n}\n\nfunction textToAudio(morse) {\n    let count = 0;\n\n    let interval = setInterval(function() {\n\n        console.log(\"Count: \" + count);\n\n        if(count === morse.length)\n        {\n            clearInterval(interval);\n        }\n        else\n        {\n            if (morse[count] === \".\") {\n                dotAudioBtn()\n            }\n            else if (morse[count] === \"-\") {\n                dashAudioBtn()\n            }\n            else {\n                spaceAudioBtn()\n            }\n            count++;\n\n        }\n    },400);\n\n}\n\nfunction decodeMorse(morseCode) {\n    // Define the Morse code alphabet as a lookup table\n    const morseAlphabet = {\n        \".-\": \"A\", \"-...\": \"B\", \"-.-.\": \"C\", \"-..\": \"D\", \".\": \"E\", \"..-.\": \"F\", \"--.\": \"G\",\n        \"....\": \"H\", \"..\": \"I\", \".---\": \"J\", \"-.-\": \"K\", \".-..\": \"L\", \"--\": \"M\", \"-.\": \"N\",\n        \"---\": \"O\", \".--.\": \"P\", \"--.-\": \"Q\", \".-.\": \"R\", \"...\": \"S\", \"-\": \"T\", \"..-\": \"U\",\n        \"...-\": \"V\", \".--\": \"W\", \"-..-\": \"X\", \"-.--\": \"Y\", \"--..\": \"Z\", \".----\": \"1\",\n        \"..---\": \"2\", \"...--\": \"3\", \"....-\": \"4\", \".....\": \"5\", \"-....\": \"6\", \"--...\": \"7\",\n        \"---..\": \"8\", \"----.\": \"9\", \"-----\": \"0\", \"--..--\": \",\", \".-.-.-\": \".\", \"..--..\": \"?\",\n        \"-..-.\": \" \", \"-.--.\": \"(\", \"-.--.-\": \")\", \".--.-.\": \"@\", \"-....-\": \"-\", \"-...-\": \"=\",\n        \".-.-.\": \"+\", \"-.-.-.\": \";\", \"---...\": \":\", \"-.-.--\": \"!\", \".-..-.\": \"\\\"\", \"...-..-\": \"$\",\n        \". ...\": \"SOS\"\n    };\n\n    // Split the input Morse code into individual letters\n    const letters = morseCode.trim().split(\" \");\n\n    // Decode each letter using the lookup table\n    const text = letters\n        .map(letter => morseAlphabet[letter])\n        .join(\"\");\n\n    return text;\n}\n\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app.js b/app.js
+--- a/app.js	(revision e2531f99ce27b0f9d3d4db20fe021aaba464101c)
++++ b/app.js	(date 1681682504643)
+@@ -36,9 +36,9 @@
+     backPageBtn.className += 'backPageBtnSlide'
+     //Applies the slide class to next button
+     nextPageBtn.className += "nextPageBtnSlide"
+-
++    //Applies the slide class to control panel
+     controlPanelMap.className += "controlPanelSlide"
+-
++    //Applies the slide class to Play button
+     playCodeBtn.className += "leftButtonsSlide"
+ 
+     shareCodeBtn.className += "rightButtonsSlide"
+@@ -55,6 +55,7 @@
+ 
+ 
+ })
++
+ //Initializes an array to store every page
+ let allNotes = []
+ //Initializes an array to store every page in morse code
+@@ -66,17 +67,14 @@
+ nextPageBtn.addEventListener('click', ()=>{
+ 
+     //If next page has content
+-    if (pageNumber < allNotes.length) {
++    if (pageNumber < countLocalStorageItems()) {
+         //index page number
+         pageNumber += 1;
+-        //page content is equal to next page
+-        notes.value = allNotes[pageNumber];
+-        //notes.value = localStorage.getItem(`${pageNumber}`)
+-
++        //adds to browser storage
++        notes.value = localStorage.getItem(`${pageNumber}`)
+         //Prevents loading new page with undefined once back button is clicked
+         if (pageNumber === allNotes.length)  {
+             notes.value = '';
+-
+         }
+     }
+ 
+@@ -85,16 +83,23 @@
+         //alerts user that page cannot be created
+         alert("Cannot advance to next page without any text.")
+     }
+-    //If the current page is not blank, add to array and create new empty page
+-    else if (notes.value !== '' && notes.value !== allNotes[pageNumber - 1]) {
++
++    //Adds the Page && notes.value !== localStorage.getItem(`${pageNumber -1}`)
++    else if (notes.value !== '') {
++
++        localStorage.setItem(`${pageNumber}`, notes.value)
+         //index page
+         pageNumber += 1;
+         //converts all text to morse code and appends to All Notes Array
+         allNotes.push(notes.value);
+         //appends to All Notes Array
+         allMorseNotes.push(stringToMorseCode(notes.value));
++
++
++
+         //sets the page value to nothing
+         notes.value = "";
++        console.log("it happens")
+ 
+ 
+     }
+@@ -104,7 +109,7 @@
+     //test case
+     console.log(allNotes);
+     console.log(allMorseNotes)
+-    save()
++
+ })
+ 
+ //When back page is clicked
+@@ -128,6 +133,7 @@
+         pageNumber -= 1
+         //sets the page content to page number
+         notes.value = allNotes[pageNumber];
++
+     }
+     //test case
+     console.log(pageNumber);
+@@ -158,11 +164,13 @@
+ })
+ 
+ function save() {
++
+     for (let i=0; i<allNotes.length; i++) {
+         localStorage.setItem(`${i}`, allNotes[i])
+         //localStorage.setItem(`${i + 1}`)
+     }
+     localStorage.setItem(`${pageNumber}`,notes.value)
++    console.log(localStorage)
+ }
+ 
+ function countLocalStorageItems() {
+@@ -233,14 +241,10 @@
+ 
+ const audioContext = new AudioContext();
+ 
+-console.log(audioContext.sampleRate)
+-
+ const buffer = audioContext.createBuffer(1, audioContext.sampleRate * .1, audioContext.sampleRate)
+ 
+ channelData = buffer.getChannelData(0)
+ 
+-console.log(channelData.length)
+-
+ for (let i = 0; i < buffer.length; i++) {
+     channelData[i] = Math.random() * 2 - 1;
+ }
+@@ -253,7 +257,7 @@
+ 
+ 
+ const playAudioBtn = document.createElement("button");
+-playAudioBtn.innerText = "Play"
++
+ 
+ function dotAudioBtn() {
+     const audioCtx = new AudioContext();
+@@ -351,9 +355,7 @@
+     const letters = morseCode.trim().split(" ");
+ 
+     // Decode each letter using the lookup table
+-    const text = letters
+-        .map(letter => morseAlphabet[letter])
+-        .join("");
++    const text = letters.map(letter => morseAlphabet[letter]).join("");
+ 
+     return text;
+ }
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project version=\"4\">\n  <component name=\"AutoImportSettings\">\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\n  </component>\n  <component name=\"ChangeListManager\">\n    <list default=\"true\" id=\"d09ea055-04f8-4ce2-92f5-18dfdc16d01e\" name=\"Changes\" comment=\"WebNotes 4.0&#10;Hosted on lennoxanderson.com/webnotes&#10;added a share button that uses native email&#10;play audio button that converts morse code text to audio\">\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/app.js\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/app.js\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/index.html\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/index.html\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/styles.css\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/styles.css\" afterDir=\"false\" />\n    </list>\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\n  </component>\n  <component name=\"FileTemplateManagerImpl\">\n    <option name=\"RECENT_TEMPLATES\">\n      <list>\n        <option value=\"HTML File\" />\n        <option value=\"CSS File\" />\n        <option value=\"JavaScript File\" />\n      </list>\n    </option>\n  </component>\n  <component name=\"Git.Settings\">\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\n    <option name=\"UPDATE_TYPE\" value=\"REBASE\" />\n  </component>\n  <component name=\"HighlightingSettingsPerFile\">\n    <setting file=\"file://$PROJECT_DIR$/app.js\" root0=\"FORCE_HIGHLIGHTING\" />\n  </component>\n  <component name=\"MarkdownSettingsMigration\">\n    <option name=\"stateVersion\" value=\"1\" />\n  </component>\n  <component name=\"ProblemsViewState\">\n    <option name=\"selectedTabId\" value=\"CurrentFile\" />\n  </component>\n  <component name=\"ProjectId\" id=\"2N3wIwTnXm8gwIQZqhgBiOnGyYA\" />\n  <component name=\"ProjectLevelVcsManager\" settingsEditedManually=\"true\" />\n  <component name=\"ProjectViewState\">\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\n    <option name=\"showLibraryContents\" value=\"true\" />\n  </component>\n  <component name=\"PropertiesComponent\"><![CDATA[{\n  \"keyToString\": {\n    \"DefaultHtmlFileTemplate\": \"HTML File\",\n    \"RunOnceActivity.OpenProjectViewOnStart\": \"true\",\n    \"RunOnceActivity.ShowReadmeOnStart\": \"true\",\n    \"WebServerToolWindowFactoryState\": \"false\",\n    \"list.type.of.created.stylesheet\": \"CSS\",\n    \"node.js.detected.package.eslint\": \"true\",\n    \"node.js.detected.package.tslint\": \"true\",\n    \"node.js.selected.package.eslint\": \"(autodetect)\",\n    \"node.js.selected.package.tslint\": \"(autodetect)\",\n    \"nodejs_interpreter_path\": \"node\",\n    \"nodejs_package_manager_path\": \"npm\",\n    \"run.code.analysis.last.selected.profile\": \"pProject Default\",\n    \"vue.rearranger.settings.migration\": \"true\"\n  }\n}]]></component>\n  <component name=\"RecentsManager\">\n    <key name=\"MoveFile.RECENT_KEYS\">\n      <recent name=\"$PROJECT_DIR$\" />\n      <recent name=\"$PROJECT_DIR$/frontend\" />\n    </key>\n  </component>\n  <component name=\"RunManager\">\n    <configuration name=\"server.js\" type=\"NodeJSConfigurationType\" temporary=\"true\" nameIsGenerated=\"true\" path-to-js-file=\"$PROJECT_DIR$/server.js\" working-dir=\"$PROJECT_DIR$\">\n      <method v=\"2\" />\n    </configuration>\n    <recent_temporary>\n      <list>\n        <item itemvalue=\"Node.js.server.js\" />\n      </list>\n    </recent_temporary>\n  </component>\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\n  <component name=\"TaskManager\">\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\n      <changelist id=\"d09ea055-04f8-4ce2-92f5-18dfdc16d01e\" name=\"Changes\" comment=\"\" />\n      <created>1678905997915</created>\n      <option name=\"number\" value=\"Default\" />\n      <option name=\"presentableId\" value=\"Default\" />\n      <updated>1678905997915</updated>\n      <workItem from=\"1678905999020\" duration=\"29480000\" />\n      <workItem from=\"1679335805987\" duration=\"3810000\" />\n      <workItem from=\"1679428094548\" duration=\"14119000\" />\n      <workItem from=\"1680646717109\" duration=\"64884000\" />\n    </task>\n    <task id=\"LOCAL-00001\" summary=\"Made READ ME\">\n      <created>1679428275659</created>\n      <option name=\"number\" value=\"00001\" />\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1679428275659</updated>\n    </task>\n    <task id=\"LOCAL-00002\" summary=\"Update\">\n      <created>1679428352835</created>\n      <option name=\"number\" value=\"00002\" />\n      <option name=\"presentableId\" value=\"LOCAL-00002\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1679428352835</updated>\n    </task>\n    <task id=\"LOCAL-00003\" summary=\"Update Read\">\n      <created>1679428408450</created>\n      <option name=\"number\" value=\"00003\" />\n      <option name=\"presentableId\" value=\"LOCAL-00003\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1679428408450</updated>\n    </task>\n    <task id=\"LOCAL-00004\" summary=\"back end\">\n      <created>1679441003174</created>\n      <option name=\"number\" value=\"00004\" />\n      <option name=\"presentableId\" value=\"LOCAL-00004\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1679441003174</updated>\n    </task>\n    <task id=\"LOCAL-00005\" summary=\"Express development\">\n      <created>1679443721332</created>\n      <option name=\"number\" value=\"00005\" />\n      <option name=\"presentableId\" value=\"LOCAL-00005\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1679443721332</updated>\n    </task>\n    <task id=\"LOCAL-00006\" summary=\"Express development\">\n      <created>1679443773540</created>\n      <option name=\"number\" value=\"00006\" />\n      <option name=\"presentableId\" value=\"LOCAL-00006\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1679443773540</updated>\n    </task>\n    <task id=\"LOCAL-00007\" summary=\"WebNotes 3.0\">\n      <created>1680665019848</created>\n      <option name=\"number\" value=\"00007\" />\n      <option name=\"presentableId\" value=\"LOCAL-00007\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1680665019848</updated>\n    </task>\n    <task id=\"LOCAL-00008\" summary=\"WebNotes 4.0\">\n      <created>1681190113946</created>\n      <option name=\"number\" value=\"00008\" />\n      <option name=\"presentableId\" value=\"LOCAL-00008\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1681190113946</updated>\n    </task>\n    <task id=\"LOCAL-00009\" summary=\"WebNotes 4.0&#10;Hosted on lennoxanderson.com/webnotes&#10;added a share button that uses native email&#10;play audio button that converts morse code text to audio\">\n      <created>1681241529784</created>\n      <option name=\"number\" value=\"00009\" />\n      <option name=\"presentableId\" value=\"LOCAL-00009\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1681241529784</updated>\n    </task>\n    <task id=\"LOCAL-00010\" summary=\"WebNotes 4.0&#10;Hosted on lennoxanderson.com/webnotes&#10;added a share button that uses native email&#10;play audio button that converts morse code text to audio\">\n      <created>1681241806002</created>\n      <option name=\"number\" value=\"00010\" />\n      <option name=\"presentableId\" value=\"LOCAL-00010\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1681241806002</updated>\n    </task>\n    <option name=\"localTasksCounter\" value=\"11\" />\n    <servers />\n  </component>\n  <component name=\"TypeScriptGeneratedFilesManager\">\n    <option name=\"version\" value=\"3\" />\n  </component>\n  <component name=\"Vcs.Log.Tabs.Properties\">\n    <option name=\"TAB_STATES\">\n      <map>\n        <entry key=\"MAIN\">\n          <value>\n            <State />\n          </value>\n        </entry>\n      </map>\n    </option>\n  </component>\n  <component name=\"VcsManagerConfiguration\">\n    <MESSAGE value=\"Made READ ME\" />\n    <MESSAGE value=\"Update\" />\n    <MESSAGE value=\"Update Read\" />\n    <MESSAGE value=\"back end\" />\n    <MESSAGE value=\"Express development\" />\n    <MESSAGE value=\"WebNotes 3.0\" />\n    <MESSAGE value=\"WebNotes 4.0\" />\n    <MESSAGE value=\"WebNotes 4.0&#10;Hosted on lennoxanderson.com/webnotes&#10;added a share button that uses native email&#10;play audio button that converts morse code text to audio\" />\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"WebNotes 4.0&#10;Hosted on lennoxanderson.com/webnotes&#10;added a share button that uses native email&#10;play audio button that converts morse code text to audio\" />\n  </component>\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision e2531f99ce27b0f9d3d4db20fe021aaba464101c)
++++ b/.idea/workspace.xml	(date 1681682817578)
+@@ -4,11 +4,10 @@
+     <option name="autoReloadType" value="SELECTIVE" />
+   </component>
+   <component name="ChangeListManager">
+-    <list default="true" id="d09ea055-04f8-4ce2-92f5-18dfdc16d01e" name="Changes" comment="WebNotes 4.0&#10;Hosted on lennoxanderson.com/webnotes&#10;added a share button that uses native email&#10;play audio button that converts morse code text to audio">
++    <list default="true" id="d09ea055-04f8-4ce2-92f5-18dfdc16d01e" name="Changes" comment="WebNotes 5.0&#10;Added encryption and decryption functionality as local storage">
++      <change afterPath="$PROJECT_DIR$/utilities.js" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/app.js" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/styles.css" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+@@ -30,6 +29,7 @@
+   </component>
+   <component name="HighlightingSettingsPerFile">
+     <setting file="file://$PROJECT_DIR$/app.js" root0="FORCE_HIGHLIGHTING" />
++    <setting file="file://$PROJECT_DIR$/utilities.js" root0="FORCE_HIGHLIGHTING" />
+   </component>
+   <component name="MarkdownSettingsMigration">
+     <option name="stateVersion" value="1" />
+@@ -87,7 +87,7 @@
+       <workItem from="1678905999020" duration="29480000" />
+       <workItem from="1679335805987" duration="3810000" />
+       <workItem from="1679428094548" duration="14119000" />
+-      <workItem from="1680646717109" duration="64884000" />
++      <workItem from="1680646717109" duration="75739000" />
+     </task>
+     <task id="LOCAL-00001" summary="Made READ ME">
+       <created>1679428275659</created>
+@@ -159,7 +159,14 @@
+       <option name="project" value="LOCAL" />
+       <updated>1681241806002</updated>
+     </task>
+-    <option name="localTasksCounter" value="11" />
++    <task id="LOCAL-00011" summary="WebNotes 5.0&#10;Added encryption and decryption functionality as local storage">
++      <created>1681435833592</created>
++      <option name="number" value="00011" />
++      <option name="presentableId" value="LOCAL-00011" />
++      <option name="project" value="LOCAL" />
++      <updated>1681435833592</updated>
++    </task>
++    <option name="localTasksCounter" value="12" />
+     <servers />
+   </component>
+   <component name="TypeScriptGeneratedFilesManager">
+@@ -185,6 +192,7 @@
+     <MESSAGE value="WebNotes 3.0" />
+     <MESSAGE value="WebNotes 4.0" />
+     <MESSAGE value="WebNotes 4.0&#10;Hosted on lennoxanderson.com/webnotes&#10;added a share button that uses native email&#10;play audio button that converts morse code text to audio" />
+-    <option name="LAST_COMMIT_MESSAGE" value="WebNotes 4.0&#10;Hosted on lennoxanderson.com/webnotes&#10;added a share button that uses native email&#10;play audio button that converts morse code text to audio" />
++    <MESSAGE value="WebNotes 5.0&#10;Added encryption and decryption functionality as local storage" />
++    <option name="LAST_COMMIT_MESSAGE" value="WebNotes 5.0&#10;Added encryption and decryption functionality as local storage" />
+   </component>
+ </project>
+\ No newline at end of file
+diff --git a/utilities.js b/utilities.js
+new file mode 100644

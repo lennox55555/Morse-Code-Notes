@@ -20,7 +20,7 @@
         right: 0;
         top: 0;
         bottom: 30%;
-        width: 5%;
+        width: 6%;
         height: 35px;
         font-size: 10pt;
         border-radius: 45px;
@@ -34,7 +34,7 @@
         right: 0;
         top: 0;
         bottom: 30%;
-        width: 5%;
+        width: 6%;
         height: 35px;
         font-size: 10pt;
         border-radius: 45px;
@@ -47,7 +47,7 @@
         right: 0;
         top: 0;
         bottom: 50%;
-        width: 5%;
+        width: 6%;
         height: 35px;
         font-size: 10pt;
         border-radius: 45px;
@@ -61,7 +61,7 @@
         right: 0;
         top: 0;
         bottom: 50%;
-        width: 5%;
+        width: 6%;
         height: 35px;
         font-size: 10pt;
         border-radius: 45px;
@@ -74,7 +74,7 @@
         right: 0;
         top: 0;
         bottom: 70%;
-        width: 5%;
+        width: 6%;
         height: 35px;
         font-size: 10pt;
         border-radius: 45px;
@@ -88,7 +88,7 @@
         right: 0;
         top: 0;
         bottom: 70%;
-        width: 5%;
+        width: 6%;
         height: 35px;
         font-size: 10pt;
         border-radius: 45px;
@@ -149,12 +149,28 @@
         animation: controlPanelSlide 1.5s forwards;
     }
 
-    .rightButtonsSlide {
-        animation: rightButtonsSlide 1.5s forwards;
+    .playCodeBtnSlide {
+        animation: playCodeBtnSlide 1.5s forwards;
     }
 
-    .leftButtonsSlide {
-        animation: leftButtonsSlide 1.5s forwards;
+    .pauseCodeBtnSlide {
+        animation: pauseCodeBtnSlide 1.5s forwards;
+    }
+
+    .encryptCodeBtnSlide {
+        animation: encryptCodeBtnSlide 1.5s forwards;
+    }
+
+    .decryptCodeBtnSlide {
+        animation: decryptCodeBtnSlide 1.5s forwards;
+    }
+
+    .shareCodeBtnSlide {
+        animation: shareCodeBtnSlide 1.5s forwards;
+    }
+
+    .saveCodeBtnSlide {
+        animation: saveCodeBtnSlide 1.5s forwards;
     }
 
     #start-btn {
@@ -191,7 +207,54 @@
         }
     }
 
-    @keyframes rightButtonsSlide {
+    @keyframes playCodeBtnSlide {
+        0% {
+
+        }
+        100% {
+            left: 64%;
+
+        }
+    }
+
+    @keyframes pauseCodeBtnSlide {
+        0% {
+
+        }
+        100% {
+            left: 78%;
+        }
+    }
+
+    @keyframes controlPanelSlide {
+        0% {
+
+        }
+        100% {
+            left: 78%;
+        }
+    }
+
+    @keyframes saveCodeBtnSlide {
+        0% {
+
+        }
+        100% {
+            left: 64%;
+
+        }
+    }
+
+    @keyframes shareCodeBtnSlide {
+        0% {
+
+        }
+        100% {
+            left: 78%;
+        }
+    }
+
+    @keyframes decryptCodeBtnSlide {
         0% {
 
         }
@@ -201,13 +264,12 @@
         }
     }
 
-    @keyframes leftButtonsSlide {
+    @keyframes encryptCodeBtnSlide {
         0% {
 
         }
         100% {
             left: 64%;
-
         }
     }
 
@@ -239,7 +301,7 @@
 }
 @media screen and (max-width:980px) {
     body {
-        background-color: lightsteelblue;
+        background-color: darkgrey;
     }
 
     #start-btn {
@@ -296,12 +358,66 @@
 
     }
 
+    #pauseCodeBtn {
+        position: fixed;
+        margin: auto;
+        left: -2000px;
+        right: 0;
+        top: 82%;
+        bottom: 0;
+        width: 15%;
+        height: 5%;
+        font-size: 20pt;
+        border-radius: 45px;
+
+
+    }
+
     #shareCodeBtn {
         position: fixed;
         margin: auto;
         left: -2000px;
         right: 0;
-        top: 81%;
+        top: 67%;
+        bottom: 0;
+        width: 15%;
+        height: 5%;
+        font-size: 20pt;
+        border-radius: 45px;
+    }
+
+    #saveCodeBtn {
+        position: fixed;
+        margin: auto;
+        left: -2000px;
+        right: 0;
+        top: 82%;
+        bottom: 0;
+        width: 15%;
+        height: 5%;
+        font-size: 20pt;
+        border-radius: 45px;
+    }
+
+    #encryptCodeBtn {
+        position: fixed;
+        margin: auto;
+        left: -2000px;
+        right: 0;
+        top: 67%;
+        bottom: 0;
+        width: 15%;
+        height: 5%;
+        font-size: 20pt;
+        border-radius: 45px;
+    }
+
+    #decryptCodeBtn {
+        position: fixed;
+        margin: auto;
+        left: -2000px;
+        right: 0;
+        top: 82%;
         bottom: 0;
         width: 15%;
         height: 5%;
@@ -333,30 +449,6 @@
         height: 125px;
         font-size: 24pt;
         border-radius: 45px;
-    }
-
-    .textAreaSlide {
-        animation: textAreaSlide 1.5s forwards;
-    }
-
-    .backPageBtnSlide {
-        animation: backPageBtnSlide 1.5s forwards;
-    }
-
-    .nextPageBtnSlide {
-        animation: nextPageBtnSlide 1.5s forwards;
-    }
-
-    .controlPanelSlide {
-        animation: controlPanelSlide 1.5s forwards;
-    }
-
-    .playCodeBtnSlide {
-        animation: playCodeBtnSlide 1.5s forwards;
-    }
-
-    .shareCodeBtnSlide {
-        animation: shareCodeBtnSlide 1.5s forwards;
     }
 
 
@@ -421,12 +513,52 @@
         }
     }
 
-    @keyframes shareCodeBtnSlide {
+    @keyframes pauseCodeBtnSlide {
         0% {
 
         }
         100% {
             left: -50%;
+
+        }
+    }
+
+    @keyframes shareCodeBtnSlide {
+        0% {
+
+        }
+        100% {
+            left: 50%;
+
+        }
+    }
+
+    @keyframes saveCodeBtnSlide {
+        0% {
+
+        }
+        100% {
+            left: 50%;
+
+        }
+    }
+
+    @keyframes encryptCodeBtnSlide {
+        0% {
+
+        }
+        100% {
+            left: 0;
+
+        }
+    }
+
+    @keyframes decryptCodeBtnSlide {
+        0% {
+
+        }
+        100% {
+            left: 0;
 
         }
     }

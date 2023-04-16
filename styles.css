@@ -351,17 +351,15 @@
         animation: controlPanelSlide 1.5s forwards;
     }
 
-    .firstColumnButtonsSlide {
-        animation: firstColumnButtonsSlide 1.5s forwards;
+    .playCodeBtnSlide {
+        animation: playCodeBtnSlide 1.5s forwards;
     }
 
-    .secondColumnButtonsSlide {
-        animation: secondColumnButtonsSlide 1.5s forwards;
+    .shareCodeBtnSlide {
+        animation: shareCodeBtnSlide 1.5s forwards;
     }
 
-    .thirdColumnButtonsSlide {
-        animation: thirdColumnButtonsSlide 1.5s forwards;
-    }
+
 
     .disappear {
         animation: disappear .5s forwards;
@@ -377,16 +375,21 @@
     }
 
     @keyframes nextPageBtnSlide {
-        0% {}
+        0% {
+
+        }
         100% {
             left: 35%;
         }
     }
 
     @keyframes textAreaSlide {
-        0% {}
+        0% {
+
+        }
         100% {
             left: 0;
+
         }
     }
 
@@ -400,30 +403,31 @@
     }
 
     @keyframes controlPanelSlide {
-        0% {}
+        0% {
+
+        }
         100% {
             left: 10%;
         }
     }
 
-    @keyframes firstColumnButtonsSlide {
-        0% {}
+    @keyframes playCodeBtnSlide {
+        0% {
+
+        }
         100% {
-            left: -10%;
+            left: -50%;
+
         }
     }
 
-    @keyframes secondColumnButtonsSlide {
-        0% {}
-        100% {
-            left: -50%;
-        }
-    }
+    @keyframes shareCodeBtnSlide {
+        0% {
 
-    @keyframes thirdColumnButtonsSlide {
-        0% {}
+        }
         100% {
             left: -50%;
+
         }
     }
 }

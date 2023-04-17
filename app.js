@@ -26,6 +26,8 @@ let saveCodeBtn = document.getElementById("saveCodeBtn");
 
 let pauseCodeBtn = document.getElementById("pauseCodeBtn");
 
+let wordCount = document.getElementById("wordCount");
+
 //On starting click
 startBtn.addEventListener('click', ()=>{
     //CSS class that make opacity 0 over 1sec
@@ -39,17 +41,17 @@ startBtn.addEventListener('click', ()=>{
 
     controlPanelMap.className += "controlPanelSlide"
 
-    playCodeBtn.className += "leftButtonsSlide"
+    playCodeBtn.className += " playCodeBtnSlide"
 
-    shareCodeBtn.className += "rightButtonsSlide"
+    shareCodeBtn.className += "shareCodeBtnSlide"
 
-    encryptCodeBtn.className += "leftButtonsSlide"
+    encryptCodeBtn.className += "encryptCodeBtnSlide"
 
-    decryptCodeBtn.className += "rightButtonsSlide"
+    decryptCodeBtn.className += "decryptCodeBtnSlide"
 
-    pauseCodeBtn.className += "rightButtonsSlide"
+    pauseCodeBtn.className += "pauseCodeBtnSlide"
 
-    saveCodeBtn.className += "leftButtonsSlide"
+    saveCodeBtn.className += "saveCodeBtnSlide"
 
     notes.value = localStorage.getItem("0")
 
@@ -64,76 +66,57 @@ let pageNumber = 0
 
 //When next page is clicked
 nextPageBtn.addEventListener('click', ()=>{
-
-    //If next page has content
-    if (pageNumber < allNotes.length) {
-        //index page number
-        pageNumber += 1;
-        //page content is equal to next page
-        notes.value = allNotes[pageNumber];
-        //notes.value = localStorage.getItem(`${pageNumber}`)
-
-        //Prevents loading new page with undefined once back button is clicked
-        if (pageNumber === allNotes.length)  {
-            notes.value = '';
-
-        }
+    if (notes.value ===``) {
+        alert("no")
     }
-
-    //Prevents from create more pages when user already has a blank page.
-    else if (notes.value ==="") {
-        //alerts user that page cannot be created
-        alert("Cannot advance to next page without any text.")
+    //New Page
+    else if (countLocalStorageItems() === pageNumber && notes.value !== "") {
+        localStorage.setItem(`${pageNumber}`, `${notes.value}`)
+        allNotes.push(notes.value)
+        allMorseNotes.push(stringToMorseCode(notes.value))
+        notes.value = ``
+        pageNumber +=1
+        console.log("new page")
     }
-    //If the current page is not blank, add to array and create new empty page
-    else if (notes.value !== '' && notes.value !== allNotes[pageNumber - 1]) {
-        //index page
-        pageNumber += 1;
-        //converts all text to morse code and appends to All Notes Array
-        allNotes.push(notes.value);
-        //appends to All Notes Array
-        allMorseNotes.push(stringToMorseCode(notes.value));
-        //sets the page value to nothing
-        notes.value = "";
+    //Load Page
+    else if (localStorage.getItem(`${pageNumber + 1}`) !== ``) {
+        allNotes[pageNumber] = notes.value
+        allMorseNotes[pageNumber] = stringToMorseCode(notes.value)
+        localStorage.removeItem(pageNumber);
+        localStorage.setItem(`${pageNumber}`, `${notes.value}`)
+        pageNumber += 1
+        notes.value = localStorage.getItem(`${pageNumber}`)
+
 
 
     }
 
-    //test case
-    console.log(pageNumber);
-    //test case
-    console.log(allNotes);
     console.log(allMorseNotes)
-    save()
+    console.log(allNotes)
+    console.log(pageNumber)
+    countWords()
 })
+
+
 
 //When back page is clicked
 backPageBtn.addEventListener('click', ()=>{
-    //Prevents program to going to negative page number
-    if (pageNumber === 0  ) {
+    if(pageNumber === 0) {
         pageNumber = 0
     }
-
-    // If there is a previous page, display previous page
-    else {
-      if (!allNotes.includes(notes.value) && notes.value !=='') {
-            //converts all text to morse code and appends to All Notes Array
-            allNotes.push(notes.value);
-            //appends to All Notes Array
-            allMorseNotes.push(stringToMorseCode(notes.value));
-
-            //sets the page content to page number
-            notes.value = allNotes[pageNumber];
-        }
+    else if (!allNotes.includes(notes.value) && notes.value !== ``) {
+        localStorage.setItem(`${pageNumber}`, `${notes.value}`)
         pageNumber -= 1
-        //sets the page content to page number
-        notes.value = allNotes[pageNumber];
+        notes.value = localStorage.getItem(`${pageNumber}`)
     }
-    //test case
-    console.log(pageNumber);
-    //test case
-    console.log(allNotes);
-    save()
+    else {
+        pageNumber -= 1
+        notes.value = localStorage.getItem(`${pageNumber}`)
+    }
+    console.log(pageNumber)
+    console.log(allNotes)
+
+    countWords()
 })
 
 encryptCodeBtn.addEventListener('click', ()=>{
@@ -177,7 +160,7 @@ function countLocalStorageItems() {
 }
 
 function countWords() {
-    return notes.value.split(" ").length;
+    return wordCount.innerText = notes.value.split(" ").length;
 }
 
 function checkFeatures() {
@@ -253,7 +236,7 @@ primaryGainControl.connect(audioContext.destination)
 
 
 const playAudioBtn = document.createElement("button");
-playAudioBtn.innerText = "Play"
+
 
 function dotAudioBtn() {
     const audioCtx = new AudioContext();
@@ -344,7 +327,7 @@ function decodeMorse(morseCode) {
         "---..": "8", "----.": "9", "-----": "0", "--..--": ",", ".-.-.-": ".", "..--..": "?",
         "-..-.": " ", "-.--.": "(", "-.--.-": ")", ".--.-.": "@", "-....-": "-", "-...-": "=",
         ".-.-.": "+", "-.-.-.": ";", "---...": ":", "-.-.--": "!", ".-..-.": "\"", "...-..-": "$",
-        ". ...": "SOS"
+        ". ...": "SOS", "/": " "
     };
 
     // Split the input Morse code into individual letters

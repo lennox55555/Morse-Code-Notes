@@ -120,6 +120,15 @@
         border-radius: 45px;
     }
 
+    #wordCount {
+        position: fixed;
+        margin: auto;
+        right: 40%;
+        top: 90%;
+        bottom: 0;
+
+    }
+
     #notes {
         position: fixed;
         margin: auto;
@@ -189,115 +198,17 @@
     .disappear {
         animation: disappear .5s forwards;
     }
-    @keyframes backPageBtnSlide {
-        0% {
-
-        }
-        100% {
-            left: 70%;
-        }
-    }
-
-    @keyframes controlPanelSlide {
-        0% {
-
-        }
-        100% {
-            left: 78%;
-        }
-    }
-
-    @keyframes playCodeBtnSlide {
-        0% {
-
-        }
-        100% {
-            left: 64%;
-
-        }
-    }
-
-    @keyframes pauseCodeBtnSlide {
-        0% {
-
-        }
-        100% {
-            left: 78%;
-        }
-    }
-
-    @keyframes controlPanelSlide {
-        0% {
-
-        }
-        100% {
-            left: 78%;
-        }
-    }
-
-    @keyframes saveCodeBtnSlide {
-        0% {
-
-        }
-        100% {
-            left: 64%;
-
-        }
-    }
-
-    @keyframes shareCodeBtnSlide {
-        0% {
-
-        }
-        100% {
-            left: 78%;
-        }
-    }
-
-    @keyframes decryptCodeBtnSlide {
-        0% {
-
-        }
-        100% {
-            left: 78%;
-
-        }
-    }
-
-    @keyframes encryptCodeBtnSlide {
-        0% {
-
-        }
-        100% {
-            left: 64%;
-        }
-    }
-
-    @keyframes nextPageBtnSlide {
-        0% {
-
-        }
-        100% {
-            left: 70%;
-        }
-    }
-
-    @keyframes textAreaSlide {
-        0% {
-        }
-        100% {
-            left: -30%;
-        }
-    }
-
-    @keyframes disappear {
-        0% {
-            opacity: 1;
-        }
-        100% {
-            opacity: 0;
-        }
-    }
+    @keyframes backPageBtnSlide { 100% { left: 70%; } }
+    @keyframes controlPanelSlide { 100% { left: 78%; } }
+    @keyframes playCodeBtnSlide { 100% { left: 64%; } }
+    @keyframes pauseCodeBtnSlide { 100% { left: 78%; } }
+    @keyframes saveCodeBtnSlide { 100% { left: 64%; } }
+    @keyframes shareCodeBtnSlide { 100% { left: 78%; } }
+    @keyframes decryptCodeBtnSlide { 100% { left: 78%; } }
+    @keyframes encryptCodeBtnSlide { 100% { left: 64%; } }
+    @keyframes nextPageBtnSlide { 100% { left: 70%; } }
+    @keyframes textAreaSlide { 100% { left: -30%; } }
+    @keyframes disappear { 100% {opacity: 0;} }
 }
 @media screen and (max-width:980px) {
     body {
@@ -457,109 +368,15 @@
         animation: disappear .5s forwards;
     }
 
-    @keyframes backPageBtnSlide {
-        0% {
-
-        }
-        100% {
-            left: -35%;
-        }
-    }
-
-    @keyframes nextPageBtnSlide {
-        0% {
-
-        }
-        100% {
-            left: 35%;
-        }
-    }
-
-    @keyframes textAreaSlide {
-        0% {
-
-        }
-        100% {
-            left: 0;
-
-        }
-    }
-
-    @keyframes disappear {
-        0% {
-            opacity: 1;
-        }
-        100% {
-            opacity: 0;
-        }
-    }
-
-    @keyframes controlPanelSlide {
-        0% {
-
-        }
-        100% {
-            left: 10%;
-        }
-    }
-
-    @keyframes playCodeBtnSlide {
-        0% {
-
-        }
-        100% {
-            left: -50%;
-
-        }
-    }
-
-    @keyframes pauseCodeBtnSlide {
-        0% {
-
-        }
-        100% {
-            left: -50%;
-
-        }
-    }
-
-    @keyframes shareCodeBtnSlide {
-        0% {
-
-        }
-        100% {
-            left: 50%;
-
-        }
-    }
-
-    @keyframes saveCodeBtnSlide {
-        0% {
-
-        }
-        100% {
-            left: 50%;
-
-        }
-    }
-
-    @keyframes encryptCodeBtnSlide {
-        0% {
-
-        }
-        100% {
-            left: 0;
-
-        }
-    }
-
-    @keyframes decryptCodeBtnSlide {
-        0% {
-
-        }
-        100% {
-            left: 0;
-
-        }
-    }
+    @keyframes backPageBtnSlide{to{left:-35%}}
+    @keyframes nextPageBtnSlide{to{left:35%}}
+    @keyframes textAreaSlide{to{left:0}}
+    @keyframes disappear{to{opacity:0}}
+    @keyframes controlPanelSlide{to{left:10%}}
+    @keyframes playCodeBtnSlide{to{left:-50%}}
+    @keyframes pauseCodeBtnSlide{to{left:-50%}}
+    @keyframes shareCodeBtnSlide{to{left:50%}}
+    @keyframes saveCodeBtnSlide{to{left:50%}}
+    @keyframes encryptCodeBtnSlide{to{left:0}}
+    @keyframes decryptCodeBtnSlide{to{left:0}}
 }

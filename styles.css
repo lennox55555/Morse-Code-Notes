@@ -123,7 +123,7 @@
     #wordCount {
         position: fixed;
         margin: auto;
-        right: 40%;
+        left: 12%;
         top: 90%;
         bottom: 0;
 
@@ -281,6 +281,16 @@
         font-size: 20pt;
         border-radius: 45px;
 
+
+    }
+
+    #wordCount {
+        position: fixed;
+        margin: auto;
+        left: 10%;
+        top: 57%;
+        bottom: 0;
+        font-size: 26pt;
 
     }
 

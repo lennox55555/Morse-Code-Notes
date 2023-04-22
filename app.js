@@ -26,7 +26,7 @@ let saveCodeBtn = document.getElementById("saveCodeBtn");
 
 let pauseCodeBtn = document.getElementById("pauseCodeBtn");
 
-let wordCount = document.getElementById("wordCount");
+let wordCountLabel = document.getElementById("wordCount");
 
 //On starting click
 startBtn.addEventListener('click', ()=>{
@@ -63,6 +63,8 @@ let allNotes = []
 let allMorseNotes = []
 //Initializes page number for reference and display
 let pageNumber = 0
+//Initializes the number of words
+let wordCount = 0
 
 //When next page is clicked
 nextPageBtn.addEventListener('click', ()=>{
@@ -146,6 +148,7 @@ function save() {
         //localStorage.setItem(`${i + 1}`)
     }
     localStorage.setItem(`${pageNumber}`,notes.value)
+    notes.value = capitalizeSentences(notes.value)
 }
 
 function countLocalStorageItems() {
@@ -160,18 +163,22 @@ function countLocalStorageItems() {
 }
 
 function countWords() {
-    return wordCount.innerText = notes.value.split(" ").length;
-}
 
-function checkFeatures() {
-    if (notes.value === "") {
-
+    if (notes.value !== "") {
+        wordCount = notes.value.split(" ").length;
+        if (wordCount === 1) {
+            wordCountLabel.innerText = `${wordCount} word`;
+        }
+        else {
+            wordCountLabel.innerText = `${wordCount} words`;
+        }
     }
     else {
-        //document.body.appendChild(playAudioBtn)
-
+        wordCount = 0;
     }
+    return wordCount;
 }
+
 
 
 document.addEventListener("keydown", event => {
@@ -179,10 +186,6 @@ document.addEventListener("keydown", event => {
     if (event.code === "Space" || event.code === "Backspace") {
         // Do something when space bar is clicked
         countWords()
-        checkFeatures()
-        //whiteNoiseSource.start()
-
-
     }
 });
 
@@ -193,7 +196,7 @@ function stringToMorseCode(str) {
         "o": "---", "p": ".--.", "q": "--.-", "r": ".-.", "s": "...", "t": "-", "u": "..-",
         "v": "...-", "w": ".--", "x": "-..-", "y": "-.--", "z": "--..", "0": "-----",
         "1": ".----", "2": "..---", "3": "...--", "4": "....-", "5": ".....", "6": "-....",
-        "7": "--...", "8": "---..", "9": "----.", " ": "/"
+        "7": "--...", "8": "---..", "9": "----.", " ": "/", ".":".-.-.-"
     };
 
     let morseCode = "";
@@ -211,18 +214,11 @@ function stringToMorseCode(str) {
     return morseCode;
 }
 
-
-
-
 const audioContext = new AudioContext();
-
-console.log(audioContext.sampleRate)
 
 const buffer = audioContext.createBuffer(1, audioContext.sampleRate * .1, audioContext.sampleRate)
 
 channelData = buffer.getChannelData(0)
-
-console.log(channelData.length)
 
 for (let i = 0; i < buffer.length; i++) {
     channelData[i] = Math.random() * 2 - 1;
@@ -234,8 +230,6 @@ primaryGainControl.gain.setValueAtTime(0.05, 0)
 
 primaryGainControl.connect(audioContext.destination)
 
-
-const playAudioBtn = document.createElement("button");
 
 
 function dotAudioBtn() {
@@ -330,7 +324,7 @@ function decodeMorse(morseCode) {
         ". ...": "SOS", "/": " "
     };
 
-    // Split the input Morse code into individual letters
+    // Split the input Morse-code into individual letters
     const letters = morseCode.trim().split(" ");
 
     // Decode each letter using the lookup table
@@ -338,6 +332,18 @@ function decodeMorse(morseCode) {
         .map(letter => morseAlphabet[letter])
         .join("");
 
-    return text;
+    return capitalizeSentences(text);
+}
+
+function capitalizeSentences(str) {
+    const lowerSentence = str.toLowerCase()
+    const sentences = lowerSentence.split('. ');
+    const capitalized = sentences.map(sentence => {
+        if (sentence.length > 0) {
+            return sentence[0].toUpperCase() + sentence.slice(1);
+        }
+        return '';
+    });
+    return capitalized.join('. ');
 }
 

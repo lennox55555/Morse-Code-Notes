@@ -13,7 +13,7 @@ let nextPageBtn = document.getElementById("nextPageBtn");
 //Assigns the play Button as with a variable
 let playCodeBtn = document.getElementById("playCodeBtn");
 
-//
+//Assigns the div to a variable
 let controlPanelMap = document.getElementById("controlPanel");
 
 let shareCodeBtn = document.getElementById("shareCodeBtn");

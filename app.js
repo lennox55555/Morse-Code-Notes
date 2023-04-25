@@ -13,7 +13,7 @@ let nextPageBtn = document.getElementById("nextPageBtn");
 //Assigns the play Button as with a variable
 let playCodeBtn = document.getElementById("playCodeBtn");
 
-//Assigns the div to a variable
+//
 let controlPanelMap = document.getElementById("controlPanel");
 
 let shareCodeBtn = document.getElementById("shareCodeBtn");
@@ -69,7 +69,7 @@ let wordCount = 0
 //When next page is clicked
 nextPageBtn.addEventListener('click', ()=>{
     if (notes.value ===``) {
-        alert("no")
+        alert("Unable to create new page, use the current page.")
     }
     //New Page
     else if (countLocalStorageItems() === pageNumber && notes.value !== "") {
@@ -244,8 +244,6 @@ function dotAudioBtn() {
     oscillator.start();
     oscillator.stop(audioContext.currentTime + 0.1)
 
-    //textToAudio(stringToMorseCode(notes.value))
-
 }
 
 
@@ -276,8 +274,6 @@ function spaceAudioBtn() {
     oscillator.connect(audioCtx.destination);
     oscillator.start();
     oscillator.stop(audioContext.currentTime + 0.3)
-
-    //textToAudio(stringToMorseCode(notes.value))
 
 }
 

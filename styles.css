@@ -143,43 +143,43 @@
 
     }
     .textAreaSlide {
-        animation: textAreaSlide 1.5s forwards;
+        animation: textAreaSlide .8s forwards;
     }
 
     .backPageBtnSlide {
-        animation: backPageBtnSlide 1.5s forwards;
+        animation: backPageBtnSlide .8s forwards;
     }
 
     .nextPageBtnSlide {
-        animation: nextPageBtnSlide 1.5s forwards;
+        animation: nextPageBtnSlide .8s forwards;
     }
 
     .controlPanelSlide {
-        animation: controlPanelSlide 1.5s forwards;
+        animation: controlPanelSlide .8s forwards;
     }
 
     .playCodeBtnSlide {
-        animation: playCodeBtnSlide 1.5s forwards;
+        animation: playCodeBtnSlide .8s forwards;
     }
 
     .pauseCodeBtnSlide {
-        animation: pauseCodeBtnSlide 1.5s forwards;
+        animation: pauseCodeBtnSlide .8s forwards;
     }
 
     .encryptCodeBtnSlide {
-        animation: encryptCodeBtnSlide 1.5s forwards;
+        animation: encryptCodeBtnSlide .8s forwards;
     }
 
     .decryptCodeBtnSlide {
-        animation: decryptCodeBtnSlide 1.5s forwards;
+        animation: decryptCodeBtnSlide .8s forwards;
     }
 
     .shareCodeBtnSlide {
-        animation: shareCodeBtnSlide 1.5s forwards;
+        animation: shareCodeBtnSlide .8s forwards;
     }
 
     .saveCodeBtnSlide {
-        animation: saveCodeBtnSlide 1.5s forwards;
+        animation: saveCodeBtnSlide .8s forwards;
     }
 
     #start-btn {

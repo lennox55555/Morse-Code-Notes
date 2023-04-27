@@ -1,38 +1,34 @@
-Project Description: Web-based Note-taking Application
-Overview
+Morse Code Notes
 
-This project is a web-based application that allows users to take notes on the web. It provides an easy-to-use interface for creating, editing, and deleting notes. The application stores notes in a database, allowing users to access them from any device with internet access.
+Morse Code Notes is a web application that allows users to write and save notes as well as encrypt and decrypt text into Morse code. In addition users can convert any text into a sudio message that play a series of dots and dashes. The website is hosted on lennoxanderson.com/morsecodenotes and uses HTML, CSS, and JavaScript for its front-end development.
 Features
 
-    Create new notes: Users can create new notes by clicking on a "New Note" button. The application opens a new note window, where users can type in the note's title and content.
+    Create and save notes on multiple pages.
+    Encrypt and decrypt text into Morse code.
+    Convert text into Morse code audio for playback.
+    Share encrypted messages via email.
+    Save notes to local storage for future use.
+    Basic animations and DOM manipulation using vanilla JavaScript.
 
-    Edit notes: Users can edit existing notes by clicking on the note's title in the application's main interface. This opens a note window, where users can modify the note's title and content.
+How to Use
 
-    Delete notes: Users can delete notes by clicking on the "Delete" button next to the note's title in the application's main interface.
+    Go to lennoxanderson.com/morsecodenotes.
+    Create a new note by clicking on the "Get Started" button.
+    Write your note and click on the "Save" button to save it to the local storage.
+    Use the "Encrypt" and "Decrypt" buttons to convert text into Morse code and vice versa.
+    Use the "Play" button to hear the Morse code audio of the text.
+    Use the "Share" button to send an encrypted message via email.
+    Use the "Next Page" button to start writting a message on a new page/document
+    Use the "Back Page" button to view or edit previous pages you created
 
-    Save notes: The application saves notes automatically as the user types, ensuring that no data is lost due to a sudden power outage or internet connectivity issues.
+Technologies Used
 
-    Search notes: The application provides a search bar where users can enter keywords to search for notes. The search feature looks through all notes' titles and contents, making it easy to find the right note quickly.
+    HTML
+    CSS
+    JavaScript
+    Local storage for data persistence
+    Web Audio API
 
-Technologies
+License
 
-The application is built using the following technologies:
-
-    Front-end: The application's user interface is built using HTML, CSS, and JavaScript. It uses the Bootstrap framework to ensure a responsive design.
-    Back-end: NodeJS
-    Middleware: ExpressJS
-
-
-Future Work
-
-The following features can be added to the application in the future:
-
-    User authentication: Adding user authentication will allow users to create accounts, securing their data.
-
-    Share notes: Adding a feature that allows users to share their notes with others via email or social media.
-
-    Add images: Allowing users to add images to their notes can enhance their functionality.
-
-Conclusion
-
-The web-based note-taking application is a simple yet useful tool for anyone who needs to jot down quick notes. The application's intuitive interface, coupled with its ability to save and retrieve notes, makes it an essential tool for professionals, students, and anyone in between.
+This project is licensed under the MIT License. Feel free to use and modify it as you please.

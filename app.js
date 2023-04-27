@@ -150,6 +150,10 @@ saveCodeBtn.addEventListener('click', ()=> {
     save()
 })
 
+pauseCodeBtn.addEventListener('click', ()=>{
+
+})
+
 playCodeBtn.addEventListener('click', ()=>{
     textToAudio(stringToMorseCode(notes.value))
 })

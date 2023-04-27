@@ -130,8 +130,20 @@ decryptCodeBtn.addEventListener('click', ()=>{
 })
 
 shareCodeBtn.addEventListener('click', ()=>{
-    window.open(`mailto:test@example.com?subject=subject&body=${allMorseNotes}`);
-    console.log("done")
+    if (countLocalStorageItems() === 0) {
+        window.open(`mailto:test@example.com?subject=subject&body=${stringToMorseCode(notes.value)}`);
+        //save code here
+    }
+    else if (!allNotes.includes(notes.value)) {
+        window.open(`mailto:test@example.com?subject=subject&body=${allMorseNotes + stringToMorseCode(notes.value)}`);
+
+    }
+    else {
+        if (allNotes.includes(notes.value)) {
+            window.open(`mailto:test@example.com?subject=subject&body=${allMorseNotes}`);
+        }
+    }
+
 })
 
 saveCodeBtn.addEventListener('click', ()=> {

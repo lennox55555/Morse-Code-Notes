@@ -27,6 +27,10 @@
 
     }
 
+    button:hover {
+        background-color: darkgray;
+    }
+
     #shareCodeBtn {
         position: fixed;
         margin: auto;
@@ -81,7 +85,7 @@
 
     }
 
-    #pauseCodeBtn {
+    #clearCodeBtn {
         position: fixed;
         margin: auto;
         left: -2000px;
@@ -162,8 +166,8 @@
         animation: playCodeBtnSlide .8s forwards;
     }
 
-    .pauseCodeBtnSlide {
-        animation: pauseCodeBtnSlide .8s forwards;
+    .clearCodeBtnSlide {
+        animation: clearCodeBtnSlide .8s forwards;
     }
 
     .encryptCodeBtnSlide {
@@ -201,7 +205,7 @@
     @keyframes backPageBtnSlide { 100% { left: 70%; } }
     @keyframes controlPanelSlide { 100% { left: 78%; } }
     @keyframes playCodeBtnSlide { 100% { left: 64%; } }
-    @keyframes pauseCodeBtnSlide { 100% { left: 78%; } }
+    @keyframes clearCodeBtnSlide { 100% { left: 78%; } }
     @keyframes saveCodeBtnSlide { 100% { left: 64%; } }
     @keyframes shareCodeBtnSlide { 100% { left: 78%; } }
     @keyframes decryptCodeBtnSlide { 100% { left: 78%; } }
@@ -269,7 +273,7 @@
 
     }
 
-    #pauseCodeBtn {
+    #clearCodeBtn {
         position: fixed;
         margin: auto;
         left: -2000px;
@@ -384,7 +388,7 @@
     @keyframes disappear{to{opacity:0}}
     @keyframes controlPanelSlide{to{left:10%}}
     @keyframes playCodeBtnSlide{to{left:-50%}}
-    @keyframes pauseCodeBtnSlide{to{left:-50%}}
+    @keyframes clearCodeBtnSlide{to{left:-50%}}
     @keyframes shareCodeBtnSlide{to{left:50%}}
     @keyframes saveCodeBtnSlide{to{left:50%}}
     @keyframes encryptCodeBtnSlide{to{left:0}}

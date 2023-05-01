@@ -13,89 +13,129 @@ let nextPageBtn = document.getElementById("nextPageBtn");
 //Assigns the play Button as with a variable
 let playCodeBtn = document.getElementById("playCodeBtn");
 
-//
+//Control panel host all the button mapping for features/actions
 let controlPanelMap = document.getElementById("controlPanel");
 
+//Assigns the share code button to a variable
 let shareCodeBtn = document.getElementById("shareCodeBtn");
 
+//Assigns the encrypt button to a variable
 let encryptCodeBtn = document.getElementById("encryptCodeBtn");
 
+//Assigns the decrypt button to a variable
 let decryptCodeBtn = document.getElementById("decryptCodeBtn");
 
+//Assigns the save button to a variable
 let saveCodeBtn = document.getElementById("saveCodeBtn");
 
-let pauseCodeBtn = document.getElementById("pauseCodeBtn");
+//Assigns the clearCode button to a variable
+let clearCodeBtn = document.getElementById("clearCodeBtn");
 
+//Assigns the wordCount meter to a variable
 let wordCountLabel = document.getElementById("wordCount");
 
 //On starting click
 startBtn.addEventListener('click', ()=>{
     //CSS class that make opacity 0 over 1sec
     startBtn.className += 'disappear'
+
     //CSS class elements slide from the left on screen
     notes.className += 'textAreaSlide'
+
     //Applies the slide class to back button
     backPageBtn.className += 'backPageBtnSlide'
+
     //Applies the slide class to next button
     nextPageBtn.className += "nextPageBtnSlide"
 
+    //Applies the slide class to control panel
     controlPanelMap.className += "controlPanelSlide"
 
+    //Applies the slide class to play button
     playCodeBtn.className += " playCodeBtnSlide"
 
+    //Applies the slide class to share button
     shareCodeBtn.className += "shareCodeBtnSlide"
 
+    //Applies the slide class to encrypt button
     encryptCodeBtn.className += "encryptCodeBtnSlide"
 
+    //Applies the slide class to decrypt button
     decryptCodeBtn.className += "decryptCodeBtnSlide"
 
-    pauseCodeBtn.className += "pauseCodeBtnSlide"
+    //Applies the slide class to clear button
+    clearCodeBtn.className += "clearCodeBtnSlide"
 
+    //Applies the slide class to save button
     saveCodeBtn.className += "saveCodeBtnSlide"
 
+    // loads the first page from the local storage
     notes.value = localStorage.getItem("0")
 
-
 })
+
 //Initializes an array to store every page
 let allNotes = []
+
 //Initializes an array to store every page in morse code
 let allMorseNotes = []
+
 //Initializes page number for reference and display
 let pageNumber = 0
+
 //Initializes the number of words
 let wordCount = 0
 
 //When next page is clicked
 nextPageBtn.addEventListener('click', ()=>{
+
+    // limits the user from creating unused blank pages
     if (notes.value ===``) {
         alert("Unable to create new page, use the current page.")
     }
-    //New Page
+
+    //If this is a new page, create a new page
     else if (countLocalStorageItems() === pageNumber && notes.value !== "") {
+
+        // uploads the current page to local storage with current page number
         localStorage.setItem(`${pageNumber}`, `${notes.value}`)
+
+        // adds to note array
         allNotes.push(notes.value)
+
+        // adds to morse note array
         allMorseNotes.push(stringToMorseCode(notes.value))
+
+        // sets the new page equal to blank
         notes.value = ``
+
+        // indexes page number
         pageNumber +=1
-        console.log("new page")
     }
-    //Load Page
+    // If there is existing Page, load content
     else if (localStorage.getItem(`${pageNumber + 1}`) !== ``) {
+
+        //updates the notes array with new updated value, this is not reactive
         allNotes[pageNumber] = notes.value
+
+        // updates the morse code array with converted morse code value
         allMorseNotes[pageNumber] = stringToMorseCode(notes.value)
+
+        // removes the previous page  from local storage
         localStorage.removeItem(pageNumber);
+
+        // updates the local storage with the previous page number but new value
         localStorage.setItem(`${pageNumber}`, `${notes.value}`)
+
+        // index page number
         pageNumber += 1
+
+        // obtains the content from nex page and makes it the current page
         notes.value = localStorage.getItem(`${pageNumber}`)
 
-
-
     }
 
-    console.log(allMorseNotes)
-    console.log(allNotes)
-    console.log(pageNumber)
+    // counts the number of words
     countWords()
 })
 
@@ -129,14 +169,15 @@ decryptCodeBtn.addEventListener('click', ()=>{
     notes.value = decodeMorse(notes.value)
 })
 
+// A function that takes the notes of all pages and adds it into a email document
 shareCodeBtn.addEventListener('click', ()=>{
     if (countLocalStorageItems() === 0) {
         window.open(`mailto:test@example.com?subject=subject&body=${stringToMorseCode(notes.value)}`);
-        //save code here
+        save()
     }
     else if (!allNotes.includes(notes.value)) {
         window.open(`mailto:test@example.com?subject=subject&body=${allMorseNotes + stringToMorseCode(notes.value)}`);
-
+        save()
     }
     else {
         if (allNotes.includes(notes.value)) {
@@ -147,24 +188,32 @@ shareCodeBtn.addEventListener('click', ()=>{
 })
 
 saveCodeBtn.addEventListener('click', ()=> {
+    // formats the text
+    notes.value = capitalizeSentences(notes.value)
+
+    // saves
     save()
 })
 
-pauseCodeBtn.addEventListener('click', ()=>{
 
+
+clearCodeBtn.addEventListener('click', ()=>{
+    localStorage.clear();
+    notes.value = ''
+    pageNumber = 0
 })
 
 playCodeBtn.addEventListener('click', ()=>{
-    textToAudio(stringToMorseCode(notes.value))
+    textToAudio(stringToMorseCode(notes.value),0)
 })
 
 function save() {
     for (let i=0; i<allNotes.length; i++) {
         localStorage.setItem(`${i}`, allNotes[i])
-        //localStorage.setItem(`${i + 1}`)
+
     }
     localStorage.setItem(`${pageNumber}`,notes.value)
-    notes.value = capitalizeSentences(notes.value)
+
 }
 
 function countLocalStorageItems() {
@@ -232,21 +281,6 @@ function stringToMorseCode(str) {
 
 const audioContext = new AudioContext();
 
-const buffer = audioContext.createBuffer(1, audioContext.sampleRate * .1, audioContext.sampleRate)
-
-channelData = buffer.getChannelData(0)
-
-for (let i = 0; i < buffer.length; i++) {
-    channelData[i] = Math.random() * 2 - 1;
-}
-
-const primaryGainControl = audioContext.createGain()
-
-primaryGainControl.gain.setValueAtTime(0.05, 0)
-
-primaryGainControl.connect(audioContext.destination)
-
-
 
 function dotAudioBtn() {
     const audioCtx = new AudioContext();
@@ -275,26 +309,30 @@ function dashAudioBtn() {
     oscillator.start();
     oscillator.stop(audioContext.currentTime + 0.3)
 
-    //textToAudio(stringToMorseCode(notes.value))
-
 }
 
 function spaceAudioBtn() {
+    // creates a new audio instance
     const audioCtx = new AudioContext();
 
-// create Oscillator node
+    // create Oscillator node
     const oscillator = audioCtx.createOscillator();
 
+    // creates a frequency that you cannot hear
     oscillator.type = "square";
     oscillator.frequency.setValueAtTime(0, audioCtx.currentTime); // value in hertz
     oscillator.connect(audioCtx.destination);
+
+    //starts the audio
     oscillator.start();
+
+    // plays the audio for 3 mili seconds
     oscillator.stop(audioContext.currentTime + 0.3)
 
 }
 
-function textToAudio(morse) {
-    let count = 0;
+function textToAudio(morse, count) {
+    //let count;
 
     let interval = setInterval(function() {
 
@@ -324,32 +362,47 @@ function textToAudio(morse) {
 
 function decodeMorse(morseCode) {
     // Define the Morse code alphabet as a lookup table
-    const morseAlphabet = {
-        ".-": "A", "-...": "B", "-.-.": "C", "-..": "D", ".": "E", "..-.": "F", "--.": "G",
-        "....": "H", "..": "I", ".---": "J", "-.-": "K", ".-..": "L", "--": "M", "-.": "N",
-        "---": "O", ".--.": "P", "--.-": "Q", ".-.": "R", "...": "S", "-": "T", "..-": "U",
-        "...-": "V", ".--": "W", "-..-": "X", "-.--": "Y", "--..": "Z", ".----": "1",
-        "..---": "2", "...--": "3", "....-": "4", ".....": "5", "-....": "6", "--...": "7",
-        "---..": "8", "----.": "9", "-----": "0", "--..--": ",", ".-.-.-": ".", "..--..": "?",
-        "-..-.": " ", "-.--.": "(", "-.--.-": ")", ".--.-.": "@", "-....-": "-", "-...-": "=",
-        ".-.-.": "+", "-.-.-.": ";", "---...": ":", "-.-.--": "!", ".-..-.": "\"", "...-..-": "$",
-        ". ...": "SOS", "/": " "
-    };
+    // Ensures there text is morse code and not any letters
+    if (/^[./\- ]+$/.test(notes.value)) {
+        const morseAlphabet = {
+            ".-": "A", "-...": "B", "-.-.": "C", "-..": "D", ".": "E", "..-.": "F", "--.": "G",
+            "....": "H", "..": "I", ".---": "J", "-.-": "K", ".-..": "L", "--": "M", "-.": "N",
+            "---": "O", ".--.": "P", "--.-": "Q", ".-.": "R", "...": "S", "-": "T", "..-": "U",
+            "...-": "V", ".--": "W", "-..-": "X", "-.--": "Y", "--..": "Z", ".----": "1",
+            "..---": "2", "...--": "3", "....-": "4", ".....": "5", "-....": "6", "--...": "7",
+            "---..": "8", "----.": "9", "-----": "0", "--..--": ",", ".-.-.-": ".", "..--..": "?",
+            "-..-.": " ", "-.--.": "(", "-.--.-": ")", ".--.-.": "@", "-....-": "-", "-...-": "=",
+            ".-.-.": "+", "-.-.-.": ";", "---...": ":", "-.-.--": "!", ".-..-.": "\"", "...-..-": "$",
+            ". ...": "SOS", "/": " "
+        };
 
-    // Split the input Morse-code into individual letters
-    const letters = morseCode.trim().split(" ");
+        // Split the input Morse-code into individual letters
+        const letters = morseCode.trim().split(" ");
 
-    // Decode each letter using the lookup table
-    const text = letters
-        .map(letter => morseAlphabet[letter])
-        .join("");
+        // Decode each letter using the lookup table
+        const text = letters
+            .map(letter => morseAlphabet[letter])
+            .join("");
 
-    return capitalizeSentences(text);
+        return capitalizeSentences(text);
+    }
+    else {
+        save()
+        alert("The only character that this program can decrypt is: .  -  / ")
+
+        return notes.value
+    }
+
 }
 
 function capitalizeSentences(str) {
+    // converts value to all lower case
     const lowerSentence = str.toLowerCase()
+
+    // finds every instance of a period followed by a space
     const sentences = lowerSentence.split('. ');
+
+    //maps the improper sentence to an upper case function but only the first letter
     const capitalized = sentences.map(sentence => {
         if (sentence.length > 0) {
             return sentence[0].toUpperCase() + sentence.slice(1);
